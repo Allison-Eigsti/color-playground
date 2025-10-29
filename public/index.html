@@ -25,18 +25,29 @@
         </section>
         <section>
             <h2>Click here to start selecting colors...</h2>
+
+            <input id="palette-title" type="text" placeholder="Title">
+
+
             <div class="palette-wrapper">
-                <div class="palette-item">##FF0000</div>
-                <div class="palette-item">##FF0000</div>
-                <div class="palette-item">##FF0000</div>
-                <div class="palette-item">##FF0000</div>
+                <div class="box" id="color1">Color 1</div>
+                    <input type="color" id="colorPicker1" style="display: none;">
+                <div class="box" id="color2">Color 2</div>
+                    <input type="color" id="colorPicker2" style="display: none;">
+                <div class="box" id="color3">Color 3</div>
+                    <input type="color" id="colorPicker3" style="display: none;">
+                <div class="box" id="color4">Color 4</div>
+                    <input type="color" id="colorPicker4" style="display: none;">
             </div>
+
+
             <div class="btn-wrapper">
-                <button class="btn">Save to Library</button>
+                <button id="saveToLocalStorage">Save Colors to Local Storage</button>
                 <button class="btn">Clear Colors</button>
                 <a href="./library.html" class="btn">Go to Library</button>
             </div>
         </section>
     </main>
+    <script type="module" src="./js/index.js"></script>
 </body>
 </html>
