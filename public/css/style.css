@@ -79,3 +79,48 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
+/* Color Playground */
+.exercise-wrapper .box {
+    border: 1px solid black;
+    display: flex;
+}
+
+.large {
+    display: flex;
+    width: 80%;
+    height: 250px;
+    margin-inline: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.small {
+    width: 25%;
+    height: 50px;
+}
+
+@media (min-width: 50em) {
+    .exercise-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .large {
+        width: 40%;
+        height: 600px;
+        justify-content: center;
+        align-items: center;
+        margin-inline: 0;
+    }
+    
+    .small {
+        width: 12%;
+        height: 100px;
+    }
+}
+
+.btn {
+    border: 1px solid black;
+    padding: .25em .5em;
+    text-decoration: none;
+}

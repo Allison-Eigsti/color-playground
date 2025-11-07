@@ -1,55 +1,42 @@
-import { load } from './library.js';
+const box1 = document.getElementById('box1');
+const box2 = document.getElementById('box2');
+const smallBoxes = document.querySelectorAll('.small');
 
-const saveBtn = document.getElementById('saveToLocalStorage');
-
-const singlePalette = {
-    title: '',
-    colors: ['', '', '', '']
-}
-
-const libraryWrapper = document.getElementById('library-wrapper');
+const colorPicker1 = document.getElementById('colorPicker1');
+const colorPicker2 = document.getElementById('colorPicker2');
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    for (let i = 1; i <= 4; i++) {
-        const color = document.getElementById(`color${i}`);
-        const picker = document.getElementById(`colorPicker${i}`);
+    window.addEventListener('load', () => {
+        const sameColor = generateColor();
+        smallBoxes.forEach((box) => {
+            box.style.backgroundColor = sameColor;
+        })
+    })
 
-        if (color && picker) {
-            color.addEventListener('click', () => {
-                picker.click();
-            })
-
-            picker.addEventListener('input', (event) => {
-                const colorValue = event.target.value;
-                color.style.backgroundColor = colorValue;
-                singlePalette.colors[i - 1] = colorValue;
-            })
-
-            saveBtn.addEventListener('click', saveToLocalStorage);
-        }
-    }
-
-    if (libraryWrapper) {
-        load(); 
-    }
+    box1.addEventListener('click', () => {
+        colorPicker1.click();
+    })
+    
+    colorPicker1.addEventListener('input', (event) => {
+        box1.style.backgroundColor = event.target.value;
+        const color1 = event.target.value
+        console.log(`Color 1: ${color1}`);
+    })
+    
+    
+    box2.addEventListener('click', () => {
+        colorPicker2.click();
+    })
+    
+    colorPicker2.addEventListener('input', (event) => {
+        box2.style.backgroundColor = event.target.value;
+        const color2 = event.target.value
+        console.log(`Color 2: ${color2}`);    
+    })
 })
 
-
-function saveToLocalStorage() {
-    const title = document.getElementById('palette-title').value || 'Untitled Palette';
-    singlePalette.title = `${title}`;
-    
-    let newPalette = {...singlePalette, colors: [...singlePalette.colors]};
-
-    let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
-
-    loadExistingPalettes.push(newPalette);
-
-    localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
-    
-    window.location.href= '../library.html';
-};
-
-
-export { libraryWrapper, singlePalette };
+// cite source: https://stackoverflow.com/questions/1484506/random-color-generator
+function generateColor() {
+    return "#" + ((1 << 24) * Math.random() | 0).toString(16).padStart(6, "0")
+}
