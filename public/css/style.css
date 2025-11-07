@@ -45,3 +45,37 @@
     color: red;
 }
 
+/* Edit hover */
+
+.box {
+    position: relative;
+}
+
+.box:hover {
+    cursor: pointer;
+}
+
+.hover-edit {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: absolute;    
+    width: 36px;
+    top: 20px;
+    right: 20px;
+}
+
+.box:hover .hover-edit {
+    opacity: 1;
+}
+
+.overlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0);
+    inset: 0;
+    transition: background-color 0.3s ease;
+}
+
+.box:hover .overlay {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+

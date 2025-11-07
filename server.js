@@ -1,5 +1,5 @@
 import express from 'express';
-import crypto from 'node:crypto';
+
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -7,6 +7,7 @@ const port = process.env.PORT || 8000;
 
 // Set up static folder
 app.use(express.static('public'));
+
 
 
 // Set up server

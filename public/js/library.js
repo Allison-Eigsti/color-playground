@@ -5,27 +5,41 @@ function load() {
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
 
     if (loadExistingPalettes.length === 0) {
-        window.alert('No existing palettes');
+        libraryWrapper.innerHTML = `<div class="alert alert-warning" role="alert">
+                                    Your color library is empty. Click 'Create New Palette' to make a color palette.</div>`
     }
-    else {        
+    else {
+        loadExistingPalettes.reverse();        
         loadExistingPalettes.forEach(palette => {
             let paletteInfo = document.createElement('div');
             paletteInfo.classList.add('palette-wrapper');
             paletteInfo.innerHTML = `
             <h2 class="palette-title">${palette.title}</h2>
-        <div class="box" data-color="color1" style="background-color: ${palette.colors[0]};">${palette.colors[0]}</div>
+        <div class="box" data-color="color1" style="background-color: ${palette.colors[0]};">${palette.colors[0]}
+            <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
             <input type="color" data-picker="colorPicker1" style="display: none;">
-        <div class="box" data-color="color2" style="background-color: ${palette.colors[1]};">${palette.colors[1]}</div>
+            <div class="overlay"></div>
+            </div>
+        <div class="box" data-color="color2" style="background-color: ${palette.colors[1]};">${palette.colors[1]}
+            <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
+            <div class="overlay"></div>
+            </div>
             <input type="color" data-picker="colorPicker2" style="display: none;">        
-        <div class="box" data-color="color3" style="background-color: ${palette.colors[2]};">${palette.colors[2]}</div>
+        <div class="box" data-color="color3" style="background-color: ${palette.colors[2]};">${palette.colors[2]}
+            <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
+            <div class="overlay"></div>            
+            </div>
             <input type="color" data-picker="colorPicker3" style="display: none;">
-        <div class="box" data-color="color4" style="background-color: ${palette.colors[3]};">${palette.colors[3]}</div>
+        <div class="box" data-color="color4" style="background-color: ${palette.colors[3]};">${palette.colors[3]}
+            <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
+            <div class="overlay"></div>
+            </div>
             <input type="color" data-picker="colorPicker4" style="display: none;">
         <div class="btn-wrapper">
             <button class="delete-btn">Delete</button>
         </div>`
 
-
+            console.log(paletteInfo);
             libraryWrapper.appendChild(paletteInfo);
 
                     // dynamically edit color palettes
