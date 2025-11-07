@@ -40,7 +40,7 @@ function load() {
             </div>
             <input type="color" data-picker="colorPicker4" style="display: none;">
         <div class="btn-wrapper">
-            <button class="delete-btn btn btn-light">Delete</button>
+            <button class="delete-btn btn btn-light" onclick="return confirm('Are you sure you want to delete this palette?');">Delete</button>
         </div>`
 
             libraryWrapper.appendChild(paletteInfo);
