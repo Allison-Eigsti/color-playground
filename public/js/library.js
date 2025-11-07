@@ -1,5 +1,8 @@
 import { libraryWrapper, singlePalette } from "./index.js";
 
+function deleteConfirmation() {
+    console.log('hi');
+}
 
 function load() {
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
@@ -40,7 +43,7 @@ function load() {
             </div>
             <input type="color" data-picker="colorPicker4" style="display: none;">
         <div class="btn-wrapper">
-            <button class="delete-btn btn btn-light" onclick="return confirm('Are you sure you want to delete this palette?');">Delete</button>
+            <button class="delete-btn btn btn-light">Delete</button>
         </div>`
 
             libraryWrapper.appendChild(paletteInfo);
@@ -73,6 +76,7 @@ function load() {
             const deleteBtn = paletteInfo.querySelector('.delete-btn');
             const paletteTitle = paletteInfo.firstChild.nextSibling.textContent;
             deleteBtn.addEventListener('click', () => {
+                if (confirm('Are you sure you want to delete this palette?'))
                 deletePalette(paletteTitle);
             });
         });
