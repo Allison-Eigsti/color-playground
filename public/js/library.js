@@ -1,4 +1,4 @@
-import { libraryWrapper, singlePalette } from "./create.js";
+import { libraryWrapper, singlePalette } from "./index.js";
 
 function load() {
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
