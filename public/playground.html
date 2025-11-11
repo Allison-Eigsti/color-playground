@@ -11,9 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
+    <header class="primary-heading">
+        <nav class="primary-navigation">
+            <ul aria-label="Primary" role="list" class="nav-list">
                 <li><a href="#">Color Playground</a></li>
                 <li><a href="./index.html">Create a Palette</a></li>
                 <li><a href="./library.html">My Color Library</a></li>
@@ -35,8 +35,12 @@
         </div>
         <input type="color" id="colorPicker2" style="display: none;">
     </div>
-    <a class="btn" href="playground.html">Refresh Colors</a>
-    <a class="btn" href="playground2.html">Exercise 2</a>
+
+    <div class="btn-wrapper">
+        <a class="btn btn-outline-dark" href="playground.html">Refresh Colors</a>
+        <a class="btn btn-outline-dark" href="playground2.html">Exercise 2</a>
+    </div>
+    
     </main>
     <script type="module" src="./js/playground.js"></script>
 </body>
