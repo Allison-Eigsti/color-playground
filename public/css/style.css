@@ -334,4 +334,6 @@ h2 {
 
 
 /* Contrast */
-
+.selected {
+    border: 3px solid greenyellow;
+}

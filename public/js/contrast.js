@@ -51,10 +51,18 @@ function loadContrastPalette(id) {
 
                 if (colorCode !== selectedColors[0] && colorCode !== selectedColors[1]) {
                     if (selectedColors.length < 2) {
-                        selectedColors.push(colorCode);  
-                    } else {
-                        selectedColors.shift();
                         selectedColors.push(colorCode);
+                        color.classList.add('selected'); 
+                    } else {
+                        let removed = selectedColors.shift()
+                        let removedColor = paletteInfo.querySelector(`[data-color][style*="${removed}`);
+
+                        if (removedColor) {
+                            removedColor.classList.remove('selected');
+                        };
+
+                        selectedColors.push(colorCode);
+                        color.classList.add('selected'); 
                     }
                 } else {
                     window.alert('The same color cannot be selected twice.')
