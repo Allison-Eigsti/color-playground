@@ -334,6 +334,19 @@ h2 {
 
 
 /* Contrast */
+.contrast-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    align-items: center;
+}
+
+.active {
+    border: 1px solid black;
+    padding: 2em;
+    border-radius: 1em;
+}
+
 .selected {
     border: 3px solid greenyellow;
 }

@@ -93,10 +93,23 @@ async function checkContrast() {
         try {
             let color1 = selectedColors[0].substring(1);
             let color2 = selectedColors[1].substring(1);
-            
+
             let response = await fetch(`https://webaim.org/resources/contrastchecker/?fcolor=${color1}&bcolor=${color2}&api`)
             let data = await response.json();
-            console.log(data);
+
+            const resultWrapper = document.getElementById('result');
+            resultWrapper.innerHTML = `<h3>Results:</h3>
+            <p>Contrast ratio: ${data.ratio}</p>
+            <p>The selected colors ${data.AA}ed the accessability check.</p>`;
+            resultWrapper.classList.add('active');
+            
+            if (data.AA === 'pass') {
+                resultWrapper.classList.add('alert');
+                resultWrapper.classList.add('alert-success');
+            } else {
+                resultWrapper.classList.add('alert');
+                resultWrapper.classList.add('alert-danger');            
+            }
         }
         catch (error) {
             console.error('error')
