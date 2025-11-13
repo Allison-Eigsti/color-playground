@@ -1,10 +1,17 @@
 const paletteWrapper = document.getElementById('palette-wrapper');
+let selectedColors = []
 
 window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const id = Number(params.get("id"));
 
     loadContrastPalette(id);
+
+    // document.addEventListener('click', e => {
+    //     if (e.target.matches('.contrast-btn')) {
+    //         console.log('this worked');
+    //     }
+    // })
 })
 
 function loadContrastPalette(id) {
@@ -16,8 +23,6 @@ function loadContrastPalette(id) {
     }
     else {
         let paletteInfo = document.createElement('div');
-        let selectedColors = [];
-
         
         paletteInfo.classList.add('palette-wrapper');
         paletteInfo.innerHTML = `<h3 class="palette-title">${palette.title}</h3>
@@ -40,6 +45,10 @@ function loadContrastPalette(id) {
             <span class="color-code">${palette.colors[3]}</span>
             <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
             <div class="overlay"></div>
+            </div>
+                    
+            <div class="btn-wrapper">
+                <button class="contrast-btn btn btn-light">Check Color Contrast</button>
             </div>`
 
         paletteWrapper.appendChild(paletteInfo);
@@ -69,5 +78,28 @@ function loadContrastPalette(id) {
                 }
             })
         } 
-};
+
+        const contrastBtn = document.querySelector('.contrast-btn');
+        contrastBtn.addEventListener('click', () => checkContrast());
+    };
+}
+
+
+async function checkContrast() {
+    if (selectedColors.length < 2) {
+        window.alert('2 colors must be selected to use the contrast tool.')
+    }
+    else {
+        try {
+            let color1 = selectedColors[0].substring(1);
+            let color2 = selectedColors[1].substring(1);
+            
+            let response = await fetch(`https://webaim.org/resources/contrastchecker/?fcolor=${color1}&bcolor=${color2}&api`)
+            let data = await response.json();
+            console.log(data);
+        }
+        catch (error) {
+            console.error('error')
+        }
+    }
 }
