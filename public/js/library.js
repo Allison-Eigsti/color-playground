@@ -39,6 +39,7 @@ function load() {
             </div>
             <input type="color" data-picker="colorPicker4" style="display: none;">
         <div class="btn-wrapper">
+            <button class="contrast-btn btn btn-light" data-id="${palette.id}">Check Palette Accessability</button>
             <button class="delete-btn btn btn-light">Delete</button>
         </div>`
 
@@ -68,6 +69,12 @@ function load() {
                     })
                 }
             }
+
+            const contrastBtn = paletteInfo.querySelector('.contrast-btn');
+            contrastBtn.addEventListener('click', (e) => {
+                const id = e.target.getAttribute('data-id');
+                window.location.href= `../contrast.html?id=${id}`;
+            })
 
             const deleteBtn = paletteInfo.querySelector('.delete-btn');
             const paletteTitle = paletteInfo.firstChild.nextSibling.textContent;

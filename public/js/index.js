@@ -3,6 +3,7 @@ import { load } from './library.js';
 const saveBtn = document.getElementById('saveToLocalStorage');
 
 const singlePalette = {
+    id: Date.now(),
     title: '',
     colors: ['', '', '', '']
 }

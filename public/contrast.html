@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrast Checker Tool</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="primary-heading">
+        <nav class="primary-navigation">
+            <ul aria-label="Primary" role="list" class="nav-list">
+                <li><a href="./playground.html">Color Playground</a></li>
+                <li><a href="./index.html">Create a Palette</a></li>
+                <li><a href="#">My Color Library</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h1>Color Contrast Tool</h1>
+        <h2>Are your palette colors accessible? Choose a background and text color to see their contrast ratio and rating.</h2>
+        
+        <div id="palette-wrapper">
+        </div>
+
+        <div class="btn-wrapper">
+            <button class="contrast-btn btn btn-light">Check Color Contrast</button>
+        </div>
+
+        <a href="./library.html" class="btn">Go back to my library</a>
+
+
+    </main>
+    <script type="module" src="./js/contrast.js"></script>
+</body>
+</html>
