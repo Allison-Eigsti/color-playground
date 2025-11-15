@@ -131,11 +131,7 @@ h2 {
     font-weight: var(--fw-bold);
 }
 
-/* Index Page */
-main {
-    width: 100%;
-}
-
+/* Page */
 .main-graphic {
     background-color: #160248;
     background-image: url('../assets/images/main-graphic.png');
@@ -210,7 +206,6 @@ main {
     border-top: none;
     width: 100%;
     height: 20vh;
-    
 }
 
 .box:first-of-type {
@@ -354,8 +349,23 @@ main {
     border: 3px solid greenyellow;
 }
 
-@media (min-width: 38em) {
+/* @media (min-width: 38em) {
     .contrast .palette-title {
         
+    }
+} */
+
+
+/* Playground and Contrast Headings */
+.playground h3,
+.contrast h3 {
+    max-width: 90%;
+    margin-inline: auto;
+    text-wrap: balance;
+}
+
+@media (min-width: 38em) {
+    .playground h3 {
+        max-width: 60%;
     }
 }
