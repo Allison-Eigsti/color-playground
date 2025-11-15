@@ -59,7 +59,7 @@ function load() {
             
                     picker.addEventListener('input', (event) => {
                         const colorValue = event.target.value;
-                        const colorCode = document.querySelector('.color-code');
+                        let colorCode = document.querySelector('.color-code');
                         color.style.backgroundColor = colorValue;
                         colorCode = colorValue;
                         singlePalette.colors[i - 1] = colorValue;

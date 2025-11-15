@@ -81,6 +81,7 @@ h2 {
 }
 
 /* Buttons */
+
 .btn-wrapper {
     display: flex;
     flex-direction: column;
@@ -131,7 +132,7 @@ h2 {
 }
 
 /* Index Page */
-.create {
+main {
     width: 100%;
 }
 
@@ -175,7 +176,7 @@ h2 {
     }
 }
 
-/* Custom Stylings*/
+/* Utility Classes */
 .center {
     text-align: center;
 }
@@ -191,14 +192,18 @@ h2 {
     padding-block: 3em;
 }
 
-/* Index Palette Layout */
+.padding-block-1 {
+    padding-block: 1em;
+}
 
+/* Index Palette Layout */
 
 .palette-wrapper {
     display: flex;
     flex-direction: column;
     width: 90%;
     margin-inline: auto;
+    padding-block: 3em;
 } 
 
 .box {
@@ -327,6 +332,7 @@ h2 {
 }
 
 .btn {
+    display: inline-block;
     border: 1px solid black;
     padding: .25em .5em;
     text-decoration: none;
@@ -341,12 +347,12 @@ h2 {
     align-items: center;
 }
 
-.active {
-    border: 1px solid black;
-    padding: 2em;
-    border-radius: 1em;
-}
-
 .selected {
     border: 3px solid greenyellow;
+}
+
+@media (min-width: 38em) {
+    .contrast-main .palette-title {
+        
+    }
 }

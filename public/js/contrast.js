@@ -6,13 +6,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const id = Number(params.get("id"));
 
     loadContrastPalette(id);
-
-    // document.addEventListener('click', e => {
-    //     if (e.target.matches('.contrast-btn')) {
-    //         console.log('this worked');
-    //     }
-    // })
 })
+
 
 function loadContrastPalette(id) {
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
