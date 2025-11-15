@@ -14,6 +14,7 @@ function load() {
             paletteInfo.classList.add('palette-wrapper');
             paletteInfo.innerHTML = `
             <h2 class="palette-title">${palette.title}</h2>
+        <div class="box-wrapper">
         <div class="box" data-color="color1" style="background-color: ${palette.colors[0]};">
         <span class="color-code">${palette.colors[0]}</span>
             <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
@@ -38,6 +39,7 @@ function load() {
             <div class="overlay"></div>
             </div>
             <input type="color" data-picker="colorPicker4" style="display: none;">
+        </div>
         <div class="btn-wrapper">
             <button class="contrast-btn btn btn-light" data-id="${palette.id}">Check Palette Accessability</button>
             <button class="delete-btn btn btn-light">Delete</button>

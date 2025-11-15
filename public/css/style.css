@@ -203,7 +203,6 @@ main {
     flex-direction: column;
     width: 90%;
     margin-inline: auto;
-    padding-block: 3em;
 } 
 
 .box {
@@ -238,24 +237,28 @@ main {
 /* Library */
 
 @media (min-width: 50em) {
-    .library .palette-wrapper {
-        display: grid; 
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(auto);
+    .library .palette-wrapper,
+    .contrast .palette-wrapper {
+        display: flex; 
+        flex-direction: column;
+        gap: 1.5em;
+        padding-block: 3em;
     }
-
-    .library .palette-title {
-        grid-column: span 5;
-    }
-
+    
+/* 
     .library .box {
         height: 300px;
+    } */
+
+    .box-wrapper {
+        display: flex;
+    }
+
+    .library .button-wrapper {
+        grid-column: span 5;
     }
 }
 
-.closed {
-    color: red;
-}
 
 /* Edit hover */
 
@@ -340,7 +343,7 @@ main {
 
 
 /* Contrast */
-.contrast-main {
+.contrast {
     display: flex;
     flex-direction: column;
     gap: 2em;
@@ -352,7 +355,7 @@ main {
 }
 
 @media (min-width: 38em) {
-    .contrast-main .palette-title {
+    .contrast .palette-title {
         
     }
 }

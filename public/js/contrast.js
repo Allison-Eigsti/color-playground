@@ -21,6 +21,7 @@ function loadContrastPalette(id) {
         
         paletteInfo.classList.add('palette-wrapper');
         paletteInfo.innerHTML = `<h3 class="palette-title">${palette.title}</h3>
+        <div class="box-wrapper">
         <div class="box" data-color="color1" style="background-color: ${palette.colors[0]};">
         <span class="color-code">${palette.colors[0]}</span>
             <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
@@ -41,7 +42,8 @@ function loadContrastPalette(id) {
             <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
             <div class="overlay"></div>
             </div>
-                    
+            </div>
+                 
             <div class="btn-wrapper">
                 <button class="contrast-btn btn btn-light">Check Color Contrast</button>
             </div>`
