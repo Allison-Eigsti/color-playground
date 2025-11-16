@@ -13,12 +13,11 @@
     --clr-neutral-900: #160248;
   
     --ff-primary: "Montserrat", sans-serif;
+    --ff-secondary: "Raleway", sans-serif;;
   
-    --ff-body: var(--ff-primary);
-    --ff-h1-and-h2: var(--ff-primary);
-    --ff-h3: var(--ff-primary);
-    --ff-h4: var(--ff-primary);
-    --ff-button: var(--ff-primary);
+    --ff-body: var(--ff-secondary);
+    --ff-h1: var(--ff-primary);
+    --ff-h2: var(--ff-secondary);
   
     --fw-regular: 400;
     --fw-semi-bold: 500;
@@ -67,20 +66,29 @@
 /* General layout */
 body{
     font-size: var(--fs-body);
-    font-family: var(--ff-primary);
+    font-family: var(--ff-body);
     color: var(--clr-neutral-900);
     background-color: var(--clr-neutral-100);
     width: 100%;
   }
   
-
+h1 {
+    font-family: var(--ff-h1);
+}
 
 h2 {
     font-size: var(--fs-secondary-heading);
-    text-wrap: pretty;
 }
 
+
 /* Buttons */
+.btn {
+    display: inline-block;
+    border: 1px solid black;
+    padding: .25em .5em;
+    text-decoration: none;
+    font-family: var(--ff-button);
+}
 
 .btn-wrapper {
     display: flex;
@@ -98,12 +106,14 @@ h2 {
         gap: 2em;
     }
 }
-  
+
+
 
 /* Primary Navigation */
 .primary-heading {
     background-color: var(--clr-neutral-100);
     position: sticky;
+    z-index: 10;
     top: 0;
 }
 
@@ -131,7 +141,9 @@ h2 {
     font-weight: var(--fw-bold);
 }
 
-/* Page */
+
+
+/* Index Page */
 .main-graphic {
     background-color: #160248;
     background-image: url('../assets/images/main-graphic.png');
@@ -172,27 +184,8 @@ h2 {
     }
 }
 
-/* Utility Classes */
-.center {
-    text-align: center;
-}
 
-.column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5em;
-}
-
-.padding-block-3 {
-    padding-block: 3em;
-}
-
-.padding-block-1 {
-    padding-block: 1em;
-}
-
-/* Index Palette Layout */
+/* Palette Layout */
 
 .palette-wrapper {
     display: flex;
@@ -289,11 +282,9 @@ h2 {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
+
+
 /* Color Playground */
-.exercise-wrapper .box {
-    border: 1px solid black;
-    display: flex;
-}
 
 .large {
     display: flex;
@@ -302,6 +293,7 @@ h2 {
     margin-inline: auto;
     justify-content: center;
     align-items: center;
+    border: 1px solid black;
 }
 
 .small {
@@ -312,7 +304,7 @@ h2 {
 @media (min-width: 50em) {
     .exercise-wrapper {
         display: flex;
-        justify-content: center;
+        justify-content: space-evenly;
     }
 
     .large {
@@ -324,17 +316,12 @@ h2 {
     }
     
     .small {
-        width: 12%;
-        height: 250px;
+        width: 15%;
+        height: 200px;
     }
 }
 
-.btn {
-    display: inline-block;
-    border: 1px solid black;
-    padding: .25em .5em;
-    text-decoration: none;
-}
+
 
 
 /* Contrast */
@@ -368,4 +355,26 @@ h2 {
     .playground h3 {
         max-width: 60%;
     }
+}
+
+
+
+/* Utility Classes */
+.center {
+    text-align: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+}
+
+.padding-block-3 {
+    padding-block: 3em;
+}
+
+.padding-block-1 {
+    padding-block: 1em;
 }
