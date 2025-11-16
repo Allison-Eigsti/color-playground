@@ -1,17 +1,44 @@
 const box1 = document.getElementById('box1');
 const box2 = document.getElementById('box2');
-const smallBoxes = document.querySelectorAll('.small');
 
 const colorPicker1 = document.getElementById('colorPicker1');
 const colorPicker2 = document.getElementById('colorPicker2');
 
+/* Exercise 1 */
+const smallBoxes = document.querySelectorAll('.small');
+
+/* Exercise 2 */
+const smallBox1 = document.getElementById('small1');
+const smallBox2 = document.getElementById('small2');
+
+const colors = [
+    ['#5A8F9B', '#439DA3'], 
+    ['#F0B36C', '#E39F4F'], 
+    ['#2C8ED4', '#2C67D4'],
+    ['#8A2BE2', '#AC26E0'],
+    ['#FFD700', '#E8C402'],
+    ['#607865', '#4D6953'],
+    ['#B668BD', '#A84AB0'],
+    ['#871B61', '#AD1778'],
+    ['#A2F774', '#80D94E'],
+    ['#A39C77', '#857D58'],
+    ['#8DCCF2', '#8DE6F2'],
+]
+
 
 document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', () => {
-        const sameColor = generateColor();
-        smallBoxes.forEach((box) => {
-            box.style.backgroundColor = sameColor;
-        })
+        if (!smallBox1 && !smallBox2) {
+            const sameColor = generateColor();
+            smallBoxes.forEach((box) => {
+                box.style.backgroundColor = sameColor;
+            })
+        }
+        else {
+            let i = Math.floor(Math.random() * colors.length);
+            smallBox1.style.backgroundColor = colors[i][0];
+            smallBox2.style.backgroundColor = colors[i][1];
+        }
     })
 
     box1.addEventListener('click', () => {
@@ -19,9 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     
     colorPicker1.addEventListener('input', (event) => {
-        box1.style.backgroundColor = event.target.value;
         const color1 = event.target.value
-        console.log(`Color 1: ${color1}`);
+        box1.style.backgroundColor = color1;
     })
     
     
@@ -30,9 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     
     colorPicker2.addEventListener('input', (event) => {
-        box2.style.backgroundColor = event.target.value;
         const color2 = event.target.value
-        console.log(`Color 2: ${color2}`);    
+        box2.style.backgroundColor = color2;   
     })
 })
 
