@@ -1,19 +1,32 @@
 import { libraryWrapper, singlePalette } from "./index.js";
 
+const dropdown = document.querySelector('.dropdown');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+const dropdownMenuButton = document.querySelector('#dropdownMenuButton');
+
+
 function load() {
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
 
     if (loadExistingPalettes.length === 0) {
+        dropdown.style.display = 'none';
         libraryWrapper.innerHTML = `<div class="alert alert-warning" role="alert">
                                     Your color library is empty. Click 'Create New Palette' to make a color palette.</div>`
     }
     else {
         loadExistingPalettes.reverse();        
         loadExistingPalettes.forEach(palette => {
+            // Dropdown menu
+            let newDropdownItem = document.createElement('a');
+            newDropdownItem.classList.add('dropdown-item');
+            newDropdownItem.href = `#${palette.title}`;
+            newDropdownItem.textContent = `${palette.title}`;
+            dropdownMenu.appendChild(newDropdownItem);
+
             let paletteInfo = document.createElement('div');
             paletteInfo.classList.add('palette-wrapper');
             paletteInfo.innerHTML = `
-            <h2 class="palette-title">${palette.title}</h2>
+            <h2 class="palette-title" id="${palette.title}">${palette.title}</h2>
         <div class="box-wrapper">
         <div class="box" data-color="color1" style="background-color: ${palette.colors[0]};">
         <span class="color-code">${palette.colors[0]}</span>
@@ -71,13 +84,16 @@ function load() {
                     })
                 }
             }
+            
 
+            // Check accessability button
             const contrastBtn = paletteInfo.querySelector('.contrast-btn');
             contrastBtn.addEventListener('click', (e) => {
                 const id = e.target.getAttribute('data-id');
                 window.location.href= `../contrast.html?id=${id}`;
             })
 
+            // Delete button
             const deleteBtn = paletteInfo.querySelector('.delete-btn');
             const paletteTitle = paletteInfo.firstChild.nextSibling.textContent;
             deleteBtn.addEventListener('click', () => {
@@ -86,6 +102,11 @@ function load() {
             });
         });
     }
+
+    //Dropdown event listener 
+    dropdownMenuButton.addEventListener('click', () => {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+    })
 }
 
 function editLocalStorage(paletteTitle, colorValue, initialColor) {
