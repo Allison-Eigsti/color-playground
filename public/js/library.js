@@ -107,6 +107,12 @@ function load() {
     dropdownMenuButton.addEventListener('click', () => {
         dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
     })
+
+    window.addEventListener('click', (e) => {
+        if (!e.target.matches('#dropdownMenuButton')) {
+            dropdownMenu.style.display = 'none';
+        }
+    })
 }
 
 function editLocalStorage(paletteTitle, colorValue, initialColor) {
