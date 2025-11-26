@@ -6,6 +6,9 @@ const dropdownMenuButton = document.querySelector('#dropdownMenuButton');
 
 
 function load() {
+// here a conditional about if there was an email input and if not load palettes with local storage
+
+
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
 
     if (loadExistingPalettes.length === 0) {

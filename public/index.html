@@ -50,8 +50,12 @@
             </div>
 
             <div class="btn-wrapper">
-                <button class="btn btn-outline-dark" id="saveToLocalStorage">Save Colors to Local Storage</button>
-                <a class="btn btn-outline-dark" href="./library.html">Go to Library</a>
+                <button class="btn btn-outline-dark" id="saveToLocalStorage">Save Palette</button>
+                <p>Do you want to save your palettes to the Cloud? Enter your email address below.</p>
+                <form action="./library.html">
+                    <input type="email" id="email" name="email" placeholder="example@gmail.com">
+                    <button type="submit">Save to the Cloud</button>
+                </form>
             </div>
              
         </section>
