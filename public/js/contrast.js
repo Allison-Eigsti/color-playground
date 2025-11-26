@@ -1,4 +1,4 @@
-const paletteWrapper = document.getElementById('palette-wrapper');
+const paletteContainer = document.getElementById('palette-container');
 let selectedColors = []
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -14,7 +14,7 @@ function loadContrastPalette(id) {
     let palette = loadExistingPalettes.find(palette => palette.id === id);
     
     if (!palette) {
-        paletteWrapper.innerHTML = `This palette was not found.`
+        paletteContainer.innerHTML = `This palette was not found.`
     }
     else {
         let paletteInfo = document.createElement('div');
@@ -45,10 +45,10 @@ function loadContrastPalette(id) {
             </div>
                  
             <div class="btn-wrapper">
-                <button class="contrast-btn btn btn-light">Check Color Contrast</button>
+                <button class="contrast-btn btn btn-outline-dark">Check Color Contrast</button>
             </div>`
 
-        paletteWrapper.appendChild(paletteInfo);
+        paletteContainer.appendChild(paletteInfo);
 
         for (let i = 1; i <=4; i++) {
             let color = paletteInfo.querySelector(`[data-color="color${i}"]`);
