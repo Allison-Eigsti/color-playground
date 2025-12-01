@@ -1,5 +1,5 @@
 const paletteContainer = document.getElementById('palette-container');
-let selectedColors = []
+let selectedColors = [];
 
 window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
@@ -22,22 +22,22 @@ function loadContrastPalette(id) {
         paletteInfo.classList.add('palette-wrapper');
         paletteInfo.innerHTML = `<h3 class="palette-title">${palette.title}</h3>
         <div class="box-wrapper">
-        <div class="box" data-color="color1" style="background-color: ${palette.colors[0]};">
+        <div class="box-contrast" data-color="color1" style="background-color: ${palette.colors[0]};">
         <span class="color-code">${palette.colors[0]}</span>
             <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
             <div class="overlay"></div>
             </div>
-        <div class="box" data-color="color2" style="background-color: ${palette.colors[1]};">
+        <div class="box-contrast" data-color="color2" style="background-color: ${palette.colors[1]};">
             <span class="color-code">${palette.colors[1]}</span>
             <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
             <div class="overlay"></div>
             </div>
-        <div class="box" data-color="color3" style="background-color: ${palette.colors[2]};">
+        <div class="box-contrast" data-color="color3" style="background-color: ${palette.colors[2]};">
             <span class="color-code">${palette.colors[2]}</span>
             <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
             <div class="overlay"></div>            
             </div>
-        <div class="box" data-color="color4" style="background-color: ${palette.colors[3]};">
+        <div class="box-contrast" data-color="color4" style="background-color: ${palette.colors[3]};">
             <span class="color-code">${palette.colors[3]}</span>
             <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
             <div class="overlay"></div>
@@ -46,22 +46,26 @@ function loadContrastPalette(id) {
                  
             <div class="btn-wrapper">
                 <button class="contrast-btn btn btn-outline-dark">Check Color Contrast</button>
+                <button class="refresh-btn btn btn-outline-dark hidden">Refresh Colors to Try Again</button>
             </div>`
 
         paletteContainer.appendChild(paletteInfo);
 
+
+        // Add event listener for each color box so that user can select 2 colors to check their contrast
         for (let i = 1; i <=4; i++) {
             let color = paletteInfo.querySelector(`[data-color="color${i}"]`);
             color.addEventListener('click', () => {
                 let colorCode = palette.colors[i - 1];
 
+                // Only 2 different colors may be selected at a time
                 if (colorCode !== selectedColors[0] && colorCode !== selectedColors[1]) {
                     if (selectedColors.length < 2) {
                         selectedColors.push(colorCode);
                         color.classList.add('selected'); 
                     } else {
                         let removed = selectedColors.shift()
-                        let removedColor = paletteInfo.querySelector(`[data-color][style*="${removed}`);
+                        let removedColor = paletteInfo.querySelector(`[data-color][style*="${removed}"]`);
 
                         if (removedColor) {
                             removedColor.classList.remove('selected');
@@ -69,6 +73,7 @@ function loadContrastPalette(id) {
 
                         selectedColors.push(colorCode);
                         color.classList.add('selected'); 
+
                     }
                 } else {
                     window.alert('The same color cannot be selected twice.')
@@ -76,6 +81,7 @@ function loadContrastPalette(id) {
             })
         } 
 
+        //Add event listener to check contrast button
         const contrastBtn = document.querySelector('.contrast-btn');
         contrastBtn.addEventListener('click', () => checkContrast());
     };
@@ -83,6 +89,22 @@ function loadContrastPalette(id) {
 
 
 async function checkContrast() {
+
+    // Add a refresh button so the user can test out different color combinations
+        let refreshBtn = document.querySelector('.refresh-btn');
+        refreshBtn.classList.remove('hidden');
+
+        //Add event listener to refresh button
+        let allBoxes = paletteContainer.querySelectorAll('.box-contrast');
+        refreshBtn.addEventListener('click', () => {
+            selectedColors = [];
+            allBoxes.forEach(box => {
+                box.classList.remove('selected');
+            })
+        })
+
+
+    // Send request to Color Contrast Checker API
     if (selectedColors.length < 2) {
         window.alert('2 colors must be selected to use the contrast tool.')
     }
@@ -93,6 +115,8 @@ async function checkContrast() {
 
             let response = await fetch(`https://webaim.org/resources/contrastchecker/?fcolor=${color1}&bcolor=${color2}&api`)
             let data = await response.json();
+
+            selectedColors = [];
 
             const resultWrapper = document.getElementById('result');
             resultWrapper.innerHTML = `<h3>Results:</h3>
@@ -105,11 +129,11 @@ async function checkContrast() {
                 resultWrapper.classList.add('alert-success');
             } else {
                 resultWrapper.classList.add('alert');
-                resultWrapper.classList.add('alert-danger');            
+                resultWrapper.classList.add('alert-danger');  
             }
         }
         catch (error) {
-            console.error('error')
+            console.error(error);
         }
     }
 }
