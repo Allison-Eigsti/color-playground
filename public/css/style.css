@@ -369,16 +369,10 @@ main {
 
 
 
-
 /* Contrast */
-.selected {
-    border: 5px solid var(--clr-neutral-900);
+.box-contrast.selected {
+    border: 8px solid var(--clr-neutral-900); 
 }
-
-/* position: absolute;
-background-color: rgba(0, 0, 0, 0);
-inset: 0;
-transition: background-color 0.3s ease; */
 
 #palette-container {
     width: 95%;
