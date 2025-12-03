@@ -114,12 +114,15 @@ main {
 
 
 /* Primary Navigation */
-.primary-navigation {
-    padding: var(--size-300);
-    background-color: var(--clr-neutral-100);
+.primary-heading {
     position: sticky;
     z-index: 10;
     top: 0;
+}
+
+.primary-navigation {
+    padding: var(--size-300);
+    background-color: var(--clr-neutral-100);
 }
 
 .nav-list {
