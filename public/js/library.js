@@ -29,25 +29,25 @@ function load() {
             <h2 class="palette-title" id="${palette.title}">${palette.title}</h2>
         <div class="box-wrapper">
         <div class="box" data-color="color1" style="background-color: ${palette.colors[0]};">
-        <span class="color-code">${palette.colors[0]}</span>
+        <span data-code="code1">${palette.colors[0]}</span>
             <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
             <input type="color" data-picker="colorPicker1" style="display: none;">
             <div class="overlay"></div>
             </div>
         <div class="box" data-color="color2" style="background-color: ${palette.colors[1]};">
-            <span class="color-code">${palette.colors[1]}</span>
+            <span data-code="code2">${palette.colors[1]}</span>
             <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
             <div class="overlay"></div>
             </div>
             <input type="color" data-picker="colorPicker2" style="display: none;">        
         <div class="box" data-color="color3" style="background-color: ${palette.colors[2]};">
-            <span class="color-code">${palette.colors[2]}</span>
+            <span data-code="code3">${palette.colors[2]}</span>
             <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
             <div class="overlay"></div>            
             </div>
             <input type="color" data-picker="colorPicker3" style="display: none;">
         <div class="box" data-color="color4" style="background-color: ${palette.colors[3]};">
-            <span class="color-code">${palette.colors[3]}</span>
+            <span data-code="code4">${palette.colors[3]}</span>
             <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
             <div class="overlay"></div>
             </div>
@@ -65,7 +65,9 @@ function load() {
                 let color = paletteInfo.querySelector(`[data-color="color${i}"]`);
                 let picker = paletteInfo.querySelector(`[data-picker="colorPicker${i}"]`);
                 let initialColor = color.textContent;
+                let colorCode = document.querySelector(`[data-code="code${i}"]`);
                 let paletteTitle = paletteInfo.querySelector('.palette-title').textContent;
+
             
                 if (color && picker) {
                     color.addEventListener('click', () => {
@@ -74,9 +76,8 @@ function load() {
             
                     picker.addEventListener('input', (event) => {
                         const colorValue = event.target.value;
-                        let colorCode = document.querySelector('.color-code');
                         color.style.backgroundColor = colorValue;
-                        colorCode = colorValue;
+                        colorCode.textContent = colorValue;
                         singlePalette.colors[i - 1] = colorValue;
                         if (initialColor !== colorValue) {
                             editLocalStorage(paletteTitle, colorValue, initialColor);
