@@ -45,8 +45,8 @@ function loadContrastPalette(id) {
             </div>
                  
             <div class="btn-wrapper">
-                <button class="contrast-btn btn btn-outline-dark">Check Color Contrast</button>
-                <button class="refresh-btn btn btn-outline-dark hidden">Refresh Colors to Try Again</button>
+                <button class="contrast-btn btn btn-accent-purple">Check Color Contrast</button>
+                <button class="refresh-btn btn delete-btn hidden">Refresh Colors to Try Again</button>
             </div>`
 
         paletteContainer.appendChild(paletteInfo);

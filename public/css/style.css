@@ -1,13 +1,14 @@
 @import url('./reset.css');
 
 :root{
-    --clr-primary-500: #7044f3;
+    /* --clr-primary-500: #7044f3; */
     --clr-primary-900: #2b009c;
   
-    /* --clr-accent-200: #d3e917; 
-    --clr-accent-300: #08df98;
-    --clr-accent-400: #fd7c87; 
-    --clr-accent-500: #b53bca; */
+    /* --clr-accent-200: #d4e9173a; 
+    --clr-accent-300: #08df9736; */
+    --clr-accent-400: #fc4857; 
+    --clr-accent-500: #b53bca10;
+    --clr-accent-550: #b53bca43;
   
     --clr-neutral-100: #f6f4f7;
     --clr-neutral-500: rgb(67, 67, 67);
@@ -96,7 +97,49 @@ main {
 }
 
 
-/* Buttons */
+/* Buttons (color variations) */
+.btn-custom {
+    color: var(--clr-neutral-900);
+    border-color: var(--clr-neutral-900);
+    background-color: var(--clr-neutral-100);
+}
+
+.btn-custom:hover {
+    background-color: var(--clr-neutral-900);
+    color: var(--clr-neutral-100)
+}
+
+.btn-custom-inverse {
+    color: var(--clr-neutral-100);
+    background-color: var(--clr-neutral-900); 
+}
+
+.btn-custom-inverse:hover {
+    color: var(--clr-neutral-900);
+    background-color: var(--clr-neutral-100);
+    border-color: var(--clr-neutral-900);
+}
+
+.delete-btn {
+    color: var(--clr-neutral-100);
+    background-color: var(--clr-neutral-900);  
+}
+
+.delete-btn:hover {
+    background-color:var(--clr-accent-400);
+}
+
+.btn-accent-purple {
+    color: var(--clr-neutral-900);
+    border-color: var(--clr-neutral-900);
+    background-color: var(--clr-accent-500);
+}
+
+.btn-accent-purple:hover {
+    color: var(--clr-neutral-900);
+    background-color: var(--clr-accent-550);
+}
+
 .btn-wrapper {
     display: flex;
     flex-direction: column;

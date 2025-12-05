@@ -55,8 +55,8 @@ function load() {
             <input type="color" data-picker="colorPicker4" style="display: none;">
         </div>
         <div class="btn-wrapper">
-            <button class="contrast-btn btn btn-outline-dark" data-id="${palette.id}">Check Palette Accessability</button>
-            <button class="delete-btn btn btn-outline-dark">Delete</button>
+            <button class="contrast-btn btn btn-custom" data-id="${palette.id}">Check Palette Accessability</button>
+            <button class="delete-btn btn">Delete</button>
         </div>`
 
             libraryWrapper.appendChild(paletteInfo);
