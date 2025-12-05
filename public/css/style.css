@@ -381,8 +381,23 @@ main {
     width: 95%;
 }
 
+.fine-print {
+    font-size: var(--fs-300);
+}
 
-/* Playground and Contrast Headings */
+main.contrast {
+    gap: var(--size-400);
+}
+
+.contrast-instructions {
+    padding: var(--size-600);
+    text-wrap: balance;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-400);
+}
+
+/* Playground Headings */
 .playground-graphic {
     background-color: var(--clr-neutral-100);
     background-image: url('../assets/images/3-mallas.png');
