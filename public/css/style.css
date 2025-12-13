@@ -36,7 +36,7 @@
     --fs-900: 8rem;
   
     --fs-body: var(--fs-200);
-    --fs-primary-heading: clamp(var(--fs-600), 15vw, var(--fs-800));
+    --fs-primary-heading: clamp(var(--fs-500), 15vw, var(--fs-700));
     --fs-secondary-heading: var(--fs-400);
     --fs-nav: var(--fs-100);
   
@@ -55,8 +55,14 @@
   @media (min-width: 768px) {
     :root {
       --fs-body: var(--fs-300);
-      --fs-primary-heading: clamp(var(--fs-700), 20vw, var(--fs-900));
+      --fs-primary-heading: clamp(var(--fs-600), 20vw, var(--fs-800));
       --fs-secondary-heading: var(--fs-500);
+    }
+}
+
+    @media (min-width: 1200px) {
+    :root {
+        --fs-primary-heading: clamp(var(--fs-700), 20vw, var(--fs-900));
     }
   }
 
@@ -360,6 +366,13 @@ main {
 
 .playground h1 {
     color: var(--clr-primary-900);
+    font-size: clamp(var(--fs-400), 10vw, var(--fs-600));
+}
+
+@media (min-width: 1200px) {
+  .playground h1 {
+    font-size: clamp(var(--fs-600), 15vw, var(--fs-900));
+}
 }
 
 .large {
@@ -390,7 +403,7 @@ main {
     padding-top: var(--size-300);
 }
 
-@media (min-width: 768pxß) {
+@media (min-width: 768px) {
     .exercise-wrapper {
         display: flex;
         justify-content: space-evenly;
@@ -417,6 +430,17 @@ main {
 
 
 /* Contrast */
+.contrast h1 {
+    color: var(--clr-primary-900);
+    font-size: var(--fs-500);
+}
+
+@media (min-width: 768px) {
+    .contrast h1 {
+        font-size: var(--fs-700);
+    }
+}
+
 .box-contrast.selected {
     border: 8px solid var(--clr-neutral-900); 
 }
