@@ -65,7 +65,6 @@ function load() {
             for (let i = 1; i <= 4; i++) {
                 let color = paletteInfo.querySelector(`[data-color="color${i}"]`);
                 let picker = paletteInfo.querySelector(`[data-picker="colorPicker${i}"]`);
-                let initialColor = palette.colors[i - 1];
                 let colorCode = paletteInfo.querySelector(`[data-code="code${i}"]`);
                 let paletteTitle = paletteInfo.querySelector('.palette-title').textContent;
 
@@ -79,10 +78,8 @@ function load() {
                         const colorValue = event.target.value;
                         color.style.backgroundColor = colorValue;
                         colorCode.textContent = colorValue;
-                        singlePalette.colors[i - 1] = colorValue;
-                        if (initialColor !== colorValue) {
-                            editLocalStorage(paletteTitle, colorValue, initialColor);
-                        }
+
+                        editLocalStorage(paletteTitle, i - 1, colorValue);
                     })
                 }
             }
@@ -97,7 +94,7 @@ function load() {
 
             // Delete button
             const deleteBtn = paletteInfo.querySelector('.delete-btn');
-            const paletteTitle = paletteInfo.firstChild.nextSibling.textContent;
+            const paletteTitle = paletteInfo.querySelector('.palette-title').textContent;
             deleteBtn.addEventListener('click', () => {
                 if (confirm('Are you sure you want to delete this palette?'))
                 deletePalette(paletteTitle);
@@ -117,12 +114,13 @@ function load() {
     })
 }
 
-function editLocalStorage(paletteTitle, colorValue, initialColor) {
+function editLocalStorage(paletteTitle, colorIndex, colorValue) {
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
     let palette = loadExistingPalettes.find((palette) => palette.title === paletteTitle);
-    let index = palette.colors.findIndex((color) => color === initialColor);
-    palette.colors.splice(index, 1, colorValue);
 
+    if (!palette) return;
+
+    palette.colors[colorIndex] = colorValue;
     localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
 }
 
