@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-// cite source: https://stackoverflow.com/questions/1484506/random-color-generator
+// Source: https://stackoverflow.com/questions/1484506/random-color-generator
 function generateColor() {
     return "#" + ((1 << 24) * Math.random() | 0).toString(16).padStart(6, "0")
 }

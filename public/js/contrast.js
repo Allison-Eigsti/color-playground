@@ -1,6 +1,7 @@
 const paletteContainer = document.getElementById('palette-container');
 let selectedColors = [];
 
+
 window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const id = Number(params.get("id"));
@@ -64,6 +65,7 @@ function loadContrastPalette(id) {
                         selectedColors.push(colorCode);
                         color.classList.add('selected'); 
                     } else {
+                    // AI CITATION: ChatGPT was used here to figure out how to target the color box in order to remove the ".selected" class //
                         let removed = selectedColors.shift()
                         let removedColor = paletteInfo.querySelector(`[data-color][style*="${removed}"]`);
 
