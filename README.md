@@ -15,6 +15,7 @@ Tools and Technologies used: Node.js, Express.js, HTML5, CSS3 (Grid, Flexbox, Me
 ## About the Color Playground Exercises
 This application was inspired by Josef Alber's theory of color, which is based around the understanding of colors as relative. Alber's designed a series of exercises that challenge the learner to observe how colors change based on the colors around them. These exercises can be found in his revolutionary work: [The Interaction of Color](https://books.google.es/books?id=A_MYU_XDXfcC&printsec=frontcover&source=gbs_atb&redir_esc=y#v=onepage&q&f=false). In response to a lack of free digital tools to experiment with these exercises, I designed an application which allows the user to engage in two of the fundamental challenges: making one color look like two, and making two colors look like one. These can be found in the Color Playground section of my website.
 
+
 ## Prerequisites
 Before getting started, make sure you have the following installed on your system:
   - **Node.js** 
@@ -29,7 +30,6 @@ bash
 node --version
 npm --version
 ```
-
 
 ## Getting Started
 1. Clone the repository using GIT
@@ -82,6 +82,7 @@ color-playground
 ├─ README.md
 └─ server.js
 ```
+
 
 ## Capstone Requirements
 1. Analyze Data Stored in Arrays: 
@@ -153,6 +154,7 @@ In this example, the title that the user inputs is saved to an object called 'si
 In this code snippet, an asynchronous GET request is made to the WebAIM Contrast Checker API. I use a try... catch block to catch potential runtime errors. Two colors in hex decimals (saved in an array called selectedColors) are sent as query parameters in the API request URL. The request is sent as fetch() and the code awaits an HTTP response. Response.json() is then used to parse the response body into a JavaScript object. The array selectedColors is reset so that the user can repeat the process. 
 
 Next, I use the returned data to dynamically update the DOM, using a conditional to display a success alert (Bootstrap) if the colors pass the contrast check and a danger alert if they fail the check. If an error occurs during this process, it is caught and logged to the console.
+
 
 ### Future Plans
 In the future, I aim to build out my own API to store user's color palettes in a JSON file. I plan to use cookies and UUIDs to identify different users in order to associate certain color palettes with a specific user. I will need a GET route to display color the color palettes in the user's library, a POST route for creating new palettes, as well as PUT and DELETE routes to edit and delete palettes.

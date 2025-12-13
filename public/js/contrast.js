@@ -25,24 +25,24 @@ function loadContrastPalette(id) {
         <div class="box-wrapper">
         <div class="box-contrast" data-color="color1" style="background-color: ${palette.colors[0]};">
         <span class="color-code">${palette.colors[0]}</span>
-            <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
+            <img src="/assets/icons/select-icon.png" alt="Select" class="hover-edit">
             <div class="overlay"></div>
             </div>
         <div class="box-contrast" data-color="color2" style="background-color: ${palette.colors[1]};">
             <span class="color-code">${palette.colors[1]}</span>
-            <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
+            <img src="/assets/icons/select-icon.png" alt="Select" class="hover-edit">
             <div class="overlay"></div>
             </div>
         <div class="box-contrast" data-color="color3" style="background-color: ${palette.colors[2]};">
             <span class="color-code">${palette.colors[2]}</span>
-            <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
+            <img src="/assets/icons/select-icon.png" alt="Select" class="hover-edit">
             <div class="overlay"></div>            
             </div>
         <div class="box-contrast" data-color="color4" style="background-color: ${palette.colors[3]};">
             <span class="color-code">${palette.colors[3]}</span>
-            <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
+            <img src="/assets/icons/select-icon.png" alt="Select" class="hover-edit">
             <div class="overlay"></div>
-            </div>
+            </div> 
             </div>
                  
             <div class="btn-wrapper">

@@ -329,7 +329,7 @@ main {
     opacity: 0;
     transition: opacity 0.3s ease;
     position: absolute;    
-    width: 36px;
+    width: 65px;
     top: 20px;
     right: 20px;
 }
