@@ -1,6 +1,6 @@
 # color-playground
 
-## Overview:
+## Overview
 
 A fully-responsive digital tool for artists and designers that includes a space for color experimentation and a personal library of stored color schemes.
 
@@ -52,7 +52,7 @@ npm --version
 ## File Organization
 —
 The Color Playground has the following file structure:
-The root directory: color-playground
+- Root directory: color-playground
 
 ```python
 color-playground
@@ -95,7 +95,7 @@ color-playground
 
 ### Code Examples
 1. Save Palette to Local Storage:
-   `function saveToLocalStorage() {
+   ```function saveToLocalStorage() {
     const title = document.getElementById('palette-title').value || 'Untitled Palette';
     singlePalette.title = `${title}`;
     
@@ -108,12 +108,13 @@ color-playground
     localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
     
     window.location.href= '../library.html';
-    };`
+    };
+    ```
 
 In this example, the title that the user inputs is saved to an object called 'singlePalette', which already includes 4 colors the user has chosen. The object singlePalette is copied and saved as a variable, newPalette. I then retrieve the previously saved palettes from local storage in a variable called loadExistingPalettes. The newPalette object is then pushed to the array of previously saved palettes, allowing the new palette to be displayed in the color library.
 
 2. GET Request to WebAIM API:
-    `if (selectedColors.length < 2) {
+    ```if (selectedColors.length < 2) {
         window.alert('2 colors must be selected to use the contrast tool.')
     }
     else {
@@ -143,7 +144,8 @@ In this example, the title that the user inputs is saved to an object called 'si
         catch (error) {
             console.error(error);
         }
-    }`
+    }
+    ```
 
 In this code snippet, an asynchronous GET request is made to the WebAIM Contrast Checker API. I use a try... catch block to catch potential runtime errors. Two colors in hex decimals (saved in an array called selectedColors) are sent as query parameters in the API request URL. The request is sent as fetch() and the code awaits an HTTP response. Response.json() is then used to parse the response body into a JavaScript object. The array selectedColors is reset so that the user can repeat the process. 
 
@@ -158,12 +160,13 @@ Eventually, I would also like revamp the user interface with React.
 - AI Usage:
   1. AI was used in the contrast.js to figure out how to target the correct color box in order to remove the ".selected" class. 
     
-    let removed = selectedColors.shift()
+    ```let removed = selectedColors.shift()
     let removedColor = paletteInfo.querySelector(`[data-color][style*="${removed}"]`);
 
     if (removedColor) {
         removedColor.classList.remove('selected');
     };
+    ```
 
 - Other Citations: 
   1. Traversy Media [Node.js Crash Course](https://www.youtube.com/watch?v=32M1al-Y6Ag)
@@ -173,7 +176,7 @@ Eventually, I would also like revamp the user interface with React.
   5. Random Color Generator: [Stack Overflow](https://stackoverflow.com/questions/1484506/random-color-generator)
 
 ### Credits
-- Many thanks to Dan Collins for his helpful feedback throughout the stages of this project.
+Many thanks to Dan Collins for his helpful feedback throughout the stages of this project.
 
 ### Author 
 Allison Eigsti, December 2025
