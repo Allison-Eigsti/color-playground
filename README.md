@@ -1,5 +1,4 @@
 # color-playground
--
 
 ## Overview:
 
@@ -28,6 +27,7 @@ You can verify your Node.js and npm installation by running:
 ```bash
 node --version
 npm --version
+```
 
 
 ## Getting Started
