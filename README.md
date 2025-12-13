@@ -186,3 +186,5 @@ Many thanks to Dan Collins for his helpful feedback throughout the stages of thi
 
 ### Author 
 Allison Eigsti, December 2025
+
+All icons and graphics are original designs created in Adobe Illustrator.

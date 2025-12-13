@@ -444,6 +444,12 @@ main {
     width: 95%;
 }
 
+.color-code {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+}
+
 .fine-print {
     font-size: var(--fs-100);
 }
