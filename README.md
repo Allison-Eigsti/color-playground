@@ -24,7 +24,8 @@ Before getting started, make sure you have the following installed on your syste
 
 You can verify your Node.js and npm installation by running:
 
-```bash
+```
+bash
 node --version
 npm --version
 ```
@@ -95,7 +96,8 @@ color-playground
 
 ### Code Examples
 1. Save Palette to Local Storage:
-   ```function saveToLocalStorage() {
+   ```
+    function saveToLocalStorage() {
     const title = document.getElementById('palette-title').value || 'Untitled Palette';
     singlePalette.title = `${title}`;
     
@@ -114,7 +116,8 @@ color-playground
 In this example, the title that the user inputs is saved to an object called 'singlePalette', which already includes 4 colors the user has chosen. The object singlePalette is copied and saved as a variable, newPalette. I then retrieve the previously saved palettes from local storage in a variable called loadExistingPalettes. The newPalette object is then pushed to the array of previously saved palettes, allowing the new palette to be displayed in the color library.
 
 2. GET Request to WebAIM API:
-    ```if (selectedColors.length < 2) {
+    ```
+    if (selectedColors.length < 2) {
         window.alert('2 colors must be selected to use the contrast tool.')
     }
     else {
@@ -160,7 +163,8 @@ Eventually, I would also like revamp the user interface with React.
 - AI Usage:
   1. AI was used in the contrast.js to figure out how to target the correct color box in order to remove the ".selected" class. 
     
-    ```let removed = selectedColors.shift()
+    ```
+    let removed = selectedColors.shift()
     let removedColor = paletteInfo.querySelector(`[data-color][style*="${removed}"]`);
 
     if (removedColor) {
