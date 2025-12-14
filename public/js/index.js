@@ -12,6 +12,8 @@ const libraryWrapper = document.getElementById('library-wrapper');
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log(singlePalette);
+    console.log(singlePalette.colors);
     for (let i = 1; i <= 4; i++) {
         const color = document.getElementById(`color${i}`);
         const picker = document.getElementById(`colorPicker${i}`);
@@ -26,10 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 color.style.backgroundColor = colorValue;
                 singlePalette.colors[i - 1] = colorValue;
             })
-
-            saveBtn.addEventListener('click', saveToLocalStorage);
         }
     }
+
+    if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+            if (singlePalette.colors.includes('')) {
+                return window.alert('You must select 4 colors to save a color palette.');
+            }
+            saveToLocalStorage();
+        });
+    }
+
 
     if (libraryWrapper) {
         load(); 
