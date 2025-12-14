@@ -174,7 +174,9 @@ Eventually, I would also like revamp the user interface with React.
     };
     ```
 
-    1. Used ChatGPT to identify a bug in my edit functionality. Originally, I was locating palette colors by hex decimal value, instead of by their index in the palette.colors array... this led to problems when a color was edited more than once before refreshing. 
+    2. Used ChatGPT to identify a bug in my edit functionality. Originally, I was locating palette colors by hex decimal value, instead of by their index in the palette.colors array... this led to problems when a color was edited more than once before refreshing.
+    
+    3. Used ChatGPT to figure out the formatting for exporting a helper function from a seperate JavsScript file (navToggle.js)
 
 - Other Citations: 
   1. Traversy Media: [Node.js Crash Course](https://www.youtube.com/watch?v=32M1al-Y6Ag)
@@ -182,7 +184,7 @@ Eventually, I would also like revamp the user interface with React.
   3. New Trix: [Save & Load All Variables To Local Storage | EASY | JavaScript | HTML](https://www.youtube.com/watch?v=ePHfRUIvbbg)
   4. Tony Teaches Tech: [How to Link to a Specific Part of a Page (HTML anchor link)](https://www.youtube.com/watch?v=xHFzQ8QRjGU)
   5. Random Color Generator: [Stack Overflow](https://stackoverflow.com/questions/1484506/random-color-generator)
-  6. Web Dev Tutorials: [JavaScript- How to Create a Responsive Hamburger Menu with HTML, CSS, & JavaScript](https://www.youtube.com/watch?v=flItyHiDm7E)
+  6. Kevin Powell: [Build a responsive website with HTML & CSS | Part Four: The navigation](https://www.youtube.com/watch?v=zPHMqqyD2kY&list=PL4-IK0AVhVjNDRHoXGort7sDWcna8cGPA&index=5)
 
 ### Credits
 Many thanks to Dan Collins for his helpful feedback throughout the stages of this project.
