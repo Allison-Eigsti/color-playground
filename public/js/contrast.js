@@ -1,3 +1,5 @@
+import { navMenuToggle } from './navToggle.js';
+
 const paletteContainer = document.getElementById('palette-container');
 let selectedColors = [];
 
@@ -5,6 +7,13 @@ let selectedColors = [];
 window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const id = Number(params.get("id"));
+
+    navMenuToggle({
+        navToggle: document.querySelector('.mobile-nav-toggle'),
+        primaryNav: document.querySelector('.primary-navigation'),
+        openIcon: document.querySelector('.hamburger-icon'),
+        closeIcon: document.querySelector('.close-icon'),
+    })
 
     loadContrastPalette(id);
 })

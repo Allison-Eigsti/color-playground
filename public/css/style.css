@@ -194,6 +194,47 @@ footer {
     font-weight: var(--fw-bold);
 }
 
+.mobile-nav-toggle {
+    display: none;
+}
+
+@media (max-width: 576px) {
+    .primary-heading {
+        background-color: var(--clr-neutral-100);
+    }
+
+    .mobile-nav-toggle {
+        display: block;
+        cursor: pointer;
+        padding: var(--size-200);
+        border: none;
+        background-color: transparent;
+    }
+
+    .mobile-nav-toggle .hamburger-icon {
+        width: 40px;
+    }
+
+    .mobile-nav-toggle .close-icon {
+        width: 40px;
+    }
+
+    .nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-200);
+    }
+
+    .primary-navigation {
+        display: none;
+    }
+
+    .primary-navigation[data-visible] {
+        display: block;
+    }
+}
+
+
 
 
 

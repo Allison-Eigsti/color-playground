@@ -1,4 +1,5 @@
 import { load } from './library.js';
+import { navMenuToggle } from './navToggle.js';
 
 const saveBtn = document.getElementById('saveToLocalStorage');
 
@@ -12,6 +13,15 @@ const libraryWrapper = document.getElementById('library-wrapper');
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    /* AI Citation: used ChatGPT to figure out format for importing functions from another .js file */
+    navMenuToggle({
+        navToggle: document.querySelector('.mobile-nav-toggle'),
+        primaryNav: document.querySelector('.primary-navigation'),
+        openIcon: document.querySelector('.hamburger-icon'),
+        closeIcon: document.querySelector('.close-icon'),
+    })
+
+
     for (let i = 1; i <= 4; i++) {
         const color = document.getElementById(`color${i}`);
         const picker = document.getElementById(`colorPicker${i}`);

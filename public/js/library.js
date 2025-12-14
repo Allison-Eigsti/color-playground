@@ -6,6 +6,7 @@ const dropdownMenuButton = document.querySelector('#dropdownMenuButton');
 
 
 function load() {
+
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
 
     if (loadExistingPalettes.length === 0) {

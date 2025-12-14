@@ -177,11 +177,12 @@ Eventually, I would also like revamp the user interface with React.
     1. Used ChatGPT to identify a bug in my edit functionality. Originally, I was locating palette colors by hex decimal value, instead of by their index in the palette.colors array... this led to problems when a color was edited more than once before refreshing. 
 
 - Other Citations: 
-  1. Traversy Media [Node.js Crash Course](https://www.youtube.com/watch?v=32M1al-Y6Ag)
-  2. Traversy Media [Express Crash Course](https://www.youtube.com/watch?v=CnH3kAXSrmU)
-  3. New Trix [Save & Load All Variables To Local Storage | EASY | JavaScript | HTML](https://www.youtube.com/watch?v=ePHfRUIvbbg)
+  1. Traversy Media: [Node.js Crash Course](https://www.youtube.com/watch?v=32M1al-Y6Ag)
+  2. Traversy Media: [Express Crash Course](https://www.youtube.com/watch?v=CnH3kAXSrmU)
+  3. New Trix: [Save & Load All Variables To Local Storage | EASY | JavaScript | HTML](https://www.youtube.com/watch?v=ePHfRUIvbbg)
   4. Tony Teaches Tech: [How to Link to a Specific Part of a Page (HTML anchor link)](https://www.youtube.com/watch?v=xHFzQ8QRjGU)
   5. Random Color Generator: [Stack Overflow](https://stackoverflow.com/questions/1484506/random-color-generator)
+  6. Web Dev Tutorials: [JavaScript- How to Create a Responsive Hamburger Menu with HTML, CSS, & JavaScript](https://www.youtube.com/watch?v=flItyHiDm7E)
 
 ### Credits
 Many thanks to Dan Collins for his helpful feedback throughout the stages of this project.

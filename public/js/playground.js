@@ -1,3 +1,5 @@
+import { navMenuToggle } from './navToggle.js';
+
 const box1 = document.getElementById('box1');
 const box2 = document.getElementById('box2');
 
@@ -27,6 +29,13 @@ const colors = [
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    navMenuToggle({
+        navToggle: document.querySelector('.mobile-nav-toggle'),
+        primaryNav: document.querySelector('.primary-navigation'),
+        openIcon: document.querySelector('.hamburger-icon'),
+        closeIcon: document.querySelector('.close-icon'),
+    })
+
     window.addEventListener('load', () => {
         if (!smallBox1 && !smallBox2) {
             const sameColor = generateColor();
