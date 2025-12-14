@@ -174,6 +174,8 @@ Eventually, I would also like revamp the user interface with React.
     };
     ```
 
+    1. Used ChatGPT to identify a bug in my edit functionality. Originally, I was locating palette colors by hex decimal value, instead of by their index in the palette.colors array... this led to problems when a color was edited more than once before refreshing. 
+
 - Other Citations: 
   1. Traversy Media [Node.js Crash Course](https://www.youtube.com/watch?v=32M1al-Y6Ag)
   2. Traversy Media [Express Crash Course](https://www.youtube.com/watch?v=CnH3kAXSrmU)

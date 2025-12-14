@@ -61,7 +61,7 @@ function load() {
 
             libraryWrapper.appendChild(paletteInfo);
 
-                    // dynamically edit color palettes
+            // dynamically edit color palettes
             for (let i = 1; i <= 4; i++) {
                 let color = paletteInfo.querySelector(`[data-color="color${i}"]`);
                 let picker = paletteInfo.querySelector(`[data-picker="colorPicker${i}"]`);
@@ -79,6 +79,7 @@ function load() {
                         color.style.backgroundColor = colorValue;
                         colorCode.textContent = colorValue;
 
+                        //AI citation: used ChatGPT to fix editing bug (colorIndex (i - 1) passed as a parameter instead of initalColor)
                         editLocalStorage(paletteTitle, i - 1, colorValue);
                     })
                 }
