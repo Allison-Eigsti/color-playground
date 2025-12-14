@@ -1,4 +1,4 @@
-import { libraryWrapper, singlePalette } from "./index.js";
+import { libraryWrapper } from "./index.js";
 
 const dropdown = document.querySelector('.dropdown');
 const dropdownMenu = document.querySelector('.dropdown-menu');
@@ -6,11 +6,8 @@ const dropdownMenuButton = document.querySelector('#dropdownMenuButton');
 
 
 function load() {
-    console.log(singlePalette);
-    console.log(singlePalette.colors);
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
 
-    console.log(loadExistingPalettes);
     if (loadExistingPalettes.length === 0) {
         dropdown.style.display = 'none';
         libraryWrapper.innerHTML = `<div class="alert alert-warning" role="alert">

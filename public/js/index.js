@@ -12,8 +12,6 @@ const libraryWrapper = document.getElementById('library-wrapper');
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log(singlePalette);
-    console.log(singlePalette.colors);
     for (let i = 1; i <= 4; i++) {
         const color = document.getElementById(`color${i}`);
         const picker = document.getElementById(`colorPicker${i}`);
@@ -39,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
             saveToLocalStorage();
         });
     }
-
 
     if (libraryWrapper) {
         load(); 

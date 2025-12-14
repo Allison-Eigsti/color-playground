@@ -91,20 +91,7 @@ function loadContrastPalette(id) {
 
 
 async function checkContrast() {
-
-    // Add a refresh button so the user can test out different color combinations
-        let refreshBtn = document.querySelector('.refresh-btn');
-        refreshBtn.classList.remove('hidden');
-
-        //Add event listener to refresh button
-        let allBoxes = paletteContainer.querySelectorAll('.box-contrast');
-        refreshBtn.addEventListener('click', () => {
-            selectedColors = [];
-            allBoxes.forEach(box => {
-                box.classList.remove('selected');
-            })
-        })
-
+    const resultWrapper = document.getElementById('result');
 
     // Send request to Color Contrast Checker API
     if (selectedColors.length < 2) {
@@ -120,7 +107,8 @@ async function checkContrast() {
 
             selectedColors = [];
 
-            const resultWrapper = document.getElementById('result');
+            resultWrapper.classList.remove('hidden');
+
             resultWrapper.innerHTML = `<h3>Results:</h3>
             <p>Contrast ratio: ${data.ratio}</p>
             <p>The selected colors ${data.AA}ed the accessability check.</p>`;
@@ -138,4 +126,24 @@ async function checkContrast() {
             console.error(error);
         }
     }
+
+    // Add a refresh button so the user can test out different color combinations
+    let refreshBtn = document.querySelector('.refresh-btn');
+    refreshBtn.classList.remove('hidden');
+
+    //Add event listener to refresh button
+    let allBoxes = paletteContainer.querySelectorAll('.box-contrast');
+    refreshBtn.addEventListener('click', () => {
+        selectedColors = [];            
+        allBoxes.forEach(box => {
+            box.classList.remove('selected');
+        })
+
+        // Hide refresh button and results wrapper after refreshing
+        refreshBtn.classList.add('hidden');
+        
+        if (resultWrapper) {
+            resultWrapper.classList.add('hidden');
+        }
+    })
 }
