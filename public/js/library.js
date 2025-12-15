@@ -31,6 +31,7 @@ function load() {
             // Dynamically generate color palettes that have been saved to local storage
             let paletteInfo = document.createElement('div');
             paletteInfo.classList.add('palette-wrapper');
+            paletteInfo.setAttribute('data-id', `${palette.id}`)
             paletteInfo.innerHTML = `
             <h2 class="palette-title" id="${palette.title}">${palette.title}</h2>
         <div class="box-wrapper">
@@ -71,7 +72,7 @@ function load() {
                 let color = paletteInfo.querySelector(`[data-color="color${i}"]`);
                 let picker = paletteInfo.querySelector(`[data-picker="colorPicker${i}"]`);
                 let colorCode = paletteInfo.querySelector(`[data-code="code${i}"]`);
-                let paletteTitle = paletteInfo.querySelector('.palette-title').textContent;
+                let paletteId = parseInt(paletteInfo.getAttribute('data-id'));
 
                 // Each box listens for click and pulls up colorpicker input
                 if (color && picker) {
@@ -86,7 +87,7 @@ function load() {
                         colorCode.textContent = colorValue;
 
                         //AI citation: used ChatGPT to fix editing bug (colorIndex (i - 1) passed as a parameter instead of initalColor)
-                        editLocalStorage(paletteTitle, i - 1, colorValue);
+                        editLocalStorage(paletteId, i - 1, colorValue);
                     })
                 }
             }
@@ -114,9 +115,11 @@ function load() {
 
     //Dropdown event listener 
     dropdownMenuButton.addEventListener('click', () => {
+        // Dropdown menu displays on click
         dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
     })
 
+    // When user clicks outside of dropdown menu, it is hidden again
     window.addEventListener('click', (e) => {
         if (!e.target.matches('#dropdownMenuButton')) {
             dropdownMenu.style.display = 'none';
@@ -124,9 +127,11 @@ function load() {
     })
 }
 
-function editLocalStorage(paletteTitle, colorIndex, colorValue) {
+function editLocalStorage(paletteId, colorIndex, colorValue) {
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
-    let palette = loadExistingPalettes.find((palette) => palette.title === paletteTitle);
+    console.log(loadExistingPalettes);
+
+    let palette = loadExistingPalettes.find((palette) => parseInt(palette.id) === paletteId);
 
     if (!palette) return;
 
