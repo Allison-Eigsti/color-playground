@@ -127,27 +127,34 @@ function load() {
     })
 }
 
+// Edit color palette
 function editLocalStorage(paletteId, colorIndex, colorValue) {
+    // Retrieve all palettes from local storage
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
-    console.log(loadExistingPalettes);
 
+    // Find specific palette to edit by id
     let palette = loadExistingPalettes.find((palette) => parseInt(palette.id) === paletteId);
 
     if (!palette) return;
 
+    // Swap out old color for new one
     palette.colors[colorIndex] = colorValue;
     localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
 }
 
+// Delete specific color palette
 function deletePalette(paletteTitle, paletteId) {
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
+    // Find palette by id and title
     let palette = loadExistingPalettes.find((palette) => palette.id === paletteId && palette.title === paletteTitle);
     let paletteIndex = loadExistingPalettes.findIndex((paletteToRemove) => paletteToRemove === palette);
 
+    // Remove palette to delete from array of palettes
     loadExistingPalettes.splice(paletteIndex, 1);
 
     localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
 
+    // Reload library without old palette
     window.location.href= '../library.html';
 }
 

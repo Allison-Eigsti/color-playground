@@ -1,10 +1,11 @@
 import { navMenuToggle } from './navToggle.js';
 
 const paletteContainer = document.getElementById('palette-container');
+
 let selectedColors = [];
 
-
 window.addEventListener('DOMContentLoaded', () => {
+    // Retrieve color palette id from URL parameters
     const params = new URLSearchParams(window.location.search);
     const id = Number(params.get("id"));
 
@@ -15,6 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
         closeIcon: document.querySelector('.close-icon'),
     })
 
+    // Load palette that was selected on library page
     loadContrastPalette(id);
 })
 
@@ -27,6 +29,7 @@ function loadContrastPalette(id) {
         paletteContainer.innerHTML = `This palette was not found.`
     }
     else {
+        // Display selected palette
         let paletteInfo = document.createElement('div');
         
         paletteInfo.classList.add('palette-wrapper');
@@ -68,12 +71,14 @@ function loadContrastPalette(id) {
             color.addEventListener('click', () => {
                 let colorCode = palette.colors[i - 1];
 
-                // Only 2 different colors may be selected at a time
+                // Checks to ensure a specific color hasn't been selected twice
                 if (colorCode !== selectedColors[0] && colorCode !== selectedColors[1]) {
+                    // Adds color to selected colors array if 2 colors haven't already been selected
                     if (selectedColors.length < 2) {
                         selectedColors.push(colorCode);
                         color.classList.add('selected'); 
                     } else {
+                    // If selected colors array already includes 2 different colors, remove the oldest and add the newest selected color
                     // AI CITATION: ChatGPT was used here to figure out how to target the color box in order to remove the ".selected" class //
                         let removed = selectedColors.shift()
                         let removedColor = paletteInfo.querySelector(`[data-color][style*="${removed}"]`);
@@ -87,6 +92,7 @@ function loadContrastPalette(id) {
 
                     }
                 } else {
+                    // Window alert to ensure color isn't repeated
                     window.alert('The same color cannot be selected twice.')
                 }
             })
@@ -111,18 +117,22 @@ async function checkContrast() {
             let color1 = selectedColors[0].substring(1);
             let color2 = selectedColors[1].substring(1);
 
+            // Send 2 selected colors to WebAIM API to check their contrast ratio
             let response = await fetch(`https://webaim.org/resources/contrastchecker/?fcolor=${color1}&bcolor=${color2}&api`)
             let data = await response.json();
 
+            // Reset selected colors array so user can try again
             selectedColors = [];
 
             resultWrapper.classList.remove('hidden');
 
+            // Display results in alert box
             resultWrapper.innerHTML = `<h3>Results:</h3>
             <p>Contrast ratio: ${data.ratio}</p>
             <p>The selected colors ${data.AA}ed the accessability check.</p>`;
             resultWrapper.classList.add('active');
             
+            // Determine color of box based on pass or fail result
             if (data.AA === 'pass') {
                 resultWrapper.classList.add('alert');
                 resultWrapper.classList.add('alert-success');

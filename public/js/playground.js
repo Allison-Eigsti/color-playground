@@ -37,19 +37,23 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     window.addEventListener('load', () => {
+        // Checks to make sure user is on Exercise 1 page
         if (!smallBox1 && !smallBox2) {
+            // Randomly generates color for small boxes in center of larger boxes
             const sameColor = generateColor();
             smallBoxes.forEach((box) => {
                 box.style.backgroundColor = sameColor;
             })
         }
         else {
+            // If on Exercise 2 page, randomly selects colors from previously established array: colors and applies those colors to the small inner boxes
             let i = Math.floor(Math.random() * colors.length);
             smallBox1.style.backgroundColor = colors[i][0];
             smallBox2.style.backgroundColor = colors[i][1];
         }
     })
 
+    // Adds event listeners so user can change background color of larger boxes (on both exercise pages)
     box1.addEventListener('click', () => {
         colorPicker1.click();
     })
@@ -71,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 // Source: https://stackoverflow.com/questions/1484506/random-color-generator
+// Randomly generates a hex decimal color
 function generateColor() {
     return "#" + ((1 << 24) * Math.random() | 0).toString(16).padStart(6, "0")
 }
