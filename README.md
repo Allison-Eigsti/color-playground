@@ -163,7 +163,7 @@ Eventually, I would also like revamp the user interface with React.
 
 ### Citations
 - AI Usage:
-  1. AI was used in the contrast.js to figure out how to target the correct color box in order to remove the ".selected" class. 
+    1. AI was used in the contrast.js to figure out how to target the correct color box in order to remove the ".selected" class. 
     
     ```
     let removed = selectedColors.shift()
