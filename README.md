@@ -61,7 +61,10 @@ color-playground
 ├─ public
 │  ├─ assets
 │  │  └─ icons
-│  │     └─ edit-icon.png
+│  │     ├─ close-menu-icon.png
+│  │     ├─ edit-icon.png
+│  │     ├─ hamburger-icon.png
+│  │     └─ select-icon.png
 │  │  └─ images
 │  │     ├─ 3-mallas.png
 │  │     └─ main-graphic.png
@@ -72,6 +75,7 @@ color-playground
 │  │  ├─ contrast.js
 │  │  ├─ index.js
 │  │  ├─ library.js
+│  │  ├─ navToggle.js
 │  │  └─ playground.js
 │  ├─ contrast.html
 │  ├─ index.html
