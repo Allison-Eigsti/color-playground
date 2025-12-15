@@ -105,7 +105,7 @@ function load() {
             const deleteBtn = paletteInfo.querySelector('.delete-btn');
             const paletteTitle = paletteInfo.querySelector('.palette-title').textContent;
             deleteBtn.addEventListener('click', (e) => {
-                const id = e.target.getAttribute('data-id');
+                const id = parseInt(e.target.getAttribute('data-id'));
                 // Pop up warning before deletion
                 if (confirm('Are you sure you want to delete this palette?'))
                 deletePalette(paletteTitle, id);
@@ -146,7 +146,7 @@ function editLocalStorage(paletteId, colorIndex, colorValue) {
 function deletePalette(paletteTitle, paletteId) {
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
     // Find palette by id and title
-    let palette = loadExistingPalettes.find((palette) => palette.id === paletteId && palette.title === paletteTitle);
+    let palette = loadExistingPalettes.find((palette) => parseInt(palette.id) === paletteId && palette.title === paletteTitle);
     let paletteIndex = loadExistingPalettes.findIndex((paletteToRemove) => paletteToRemove === palette);
 
     // Remove palette to delete from array of palettes
