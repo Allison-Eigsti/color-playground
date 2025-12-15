@@ -4,21 +4,25 @@ const dropdown = document.querySelector('.dropdown');
 const dropdownMenu = document.querySelector('.dropdown-menu');
 const dropdownMenuButton = document.querySelector('#dropdownMenuButton');
 
-
+// Load and display all saved palettes in color library 
 function load() {
 
+    // Retrieve from local storage and parse into JSON objects 
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
 
+    // If no previously saved palettes display 'empty library' alert 
     if (loadExistingPalettes.length === 0) {
         dropdown.style.display = 'none';
         libraryWrapper.innerHTML = `<div class="alert alert-warning" role="alert">
                                     Your color library is empty. Click 'Create New Palette' to make a color palette.</div>`
     }
     else {
+        // Reverse order of palettes so newest ones appear at the top of page 
         loadExistingPalettes.reverse();        
         loadExistingPalettes.forEach(palette => {
             // Dropdown menu
             let newDropdownItem = document.createElement('a');
+            // Add new dropdown item (new palette title) to dropdown menu 
             newDropdownItem.classList.add('dropdown-item');
             newDropdownItem.href = `#${palette.title}`;
             newDropdownItem.textContent = `${palette.title}`;
@@ -57,24 +61,25 @@ function load() {
         </div>
         <div class="btn-wrapper">
             <button class="contrast-btn btn btn-custom" data-id="${palette.id}">Check Palette Accessability</button>
-            <button class="delete-btn btn">Delete</button>
+            <button class="delete-btn btn" data-id="${palette.id}">Delete</button>
         </div>`
 
             libraryWrapper.appendChild(paletteInfo);
 
-            // dynamically edit color palettes
+            // Edit color palettes- loop through each palette box
             for (let i = 1; i <= 4; i++) {
                 let color = paletteInfo.querySelector(`[data-color="color${i}"]`);
                 let picker = paletteInfo.querySelector(`[data-picker="colorPicker${i}"]`);
                 let colorCode = paletteInfo.querySelector(`[data-code="code${i}"]`);
                 let paletteTitle = paletteInfo.querySelector('.palette-title').textContent;
 
-            
+                // Each box listens for click and pulls up colorpicker input
                 if (color && picker) {
                     color.addEventListener('click', () => {
                         picker.click();
                     })
-            
+                    
+                    // If color is changed, new background color and color code are displayed
                     picker.addEventListener('input', (event) => {
                         const colorValue = event.target.value;
                         color.style.backgroundColor = colorValue;
@@ -90,6 +95,7 @@ function load() {
             // Check accessability button
             const contrastBtn = paletteInfo.querySelector('.contrast-btn');
             contrastBtn.addEventListener('click', (e) => {
+                // Appends palette id as a URL query parameter and loads contrast page with the selected color palette
                 const id = e.target.getAttribute('data-id');
                 window.location.href= `../contrast.html?id=${id}`;
             })
@@ -97,9 +103,11 @@ function load() {
             // Delete button
             const deleteBtn = paletteInfo.querySelector('.delete-btn');
             const paletteTitle = paletteInfo.querySelector('.palette-title').textContent;
-            deleteBtn.addEventListener('click', () => {
+            deleteBtn.addEventListener('click', (e) => {
+                const id = e.target.getAttribute('data-id');
+                // Pop up warning before deletion
                 if (confirm('Are you sure you want to delete this palette?'))
-                deletePalette(paletteTitle);
+                deletePalette(paletteTitle, id);
             });
         });
     }
@@ -126,9 +134,9 @@ function editLocalStorage(paletteTitle, colorIndex, colorValue) {
     localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
 }
 
-function deletePalette(paletteTitle) {
+function deletePalette(paletteTitle, paletteId) {
     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
-    let palette = loadExistingPalettes.find((palette) => palette.title === paletteTitle);
+    let palette = loadExistingPalettes.find((palette) => palette.id === paletteId && palette.title === paletteTitle);
     let paletteIndex = loadExistingPalettes.findIndex((paletteToRemove) => paletteToRemove === palette);
 
     loadExistingPalettes.splice(paletteIndex, 1);
