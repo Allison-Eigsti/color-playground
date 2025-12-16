@@ -102,6 +102,8 @@ function loadContrastPalette(id) {
         const contrastBtn = document.querySelector('.contrast-btn');
         contrastBtn.addEventListener('click', () => checkContrast());
     };
+
+    console.log(selectedColors);
 }
 
 

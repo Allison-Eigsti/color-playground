@@ -2,7 +2,7 @@ import express from 'express';
 
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = 8000;
 
 
 // Set up static folder
