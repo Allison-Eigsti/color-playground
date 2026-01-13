@@ -128,10 +128,19 @@ async function checkContrast() {
 
             resultWrapper.classList.remove('hidden');
 
+            if (resultWrapper.classList.contains('alert-success')) {
+                resultWrapper.classList.remove('alert-success');
+            }
+            else if (resultWrapper.classList.contains('alert-danger')){
+                resultWrapper.classList.remove('alert-danger');
+            }
+
+
             // Display results in alert box
             resultWrapper.innerHTML = `<h3>Results:</h3>
             <p>Contrast ratio: ${data.ratio}</p>
             <p>The selected colors ${data.AA}ed the accessability check.</p>`;
+            
             resultWrapper.classList.add('active');
             
             // Determine color of box based on pass or fail result
