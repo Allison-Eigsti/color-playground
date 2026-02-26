@@ -123,7 +123,7 @@ async function checkContrast() {
             let response = await fetch(`https://webaim.org/resources/contrastchecker/?fcolor=${color1}&bcolor=${color2}&api`)
             let data = await response.json();
 
-            // Reset selected colors array so user can try again
+            // Reset selected colors array and results wrapper classes so user can try again
             selectedColors = [];
 
             resultWrapper.classList.remove('hidden');
