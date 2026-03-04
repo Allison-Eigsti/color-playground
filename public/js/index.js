@@ -1,8 +1,11 @@
 import { load } from './library.js';
 
+const user = localStorage.getItem('UUID');
+
 const saveBtn = document.getElementById('saveToLocalStorage');
 
 const singlePalette = {
+    user: user,
     id: Date.now(),
     title: '',
     colors: ['', '', '', '']
@@ -12,6 +15,11 @@ const libraryWrapper = document.getElementById('library-wrapper');
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Checks if browser is associated with a user
+    if (user === null) {
+        generateUUID();
+    }
+
     for (let i = 1; i <= 4; i++) {
         const color = document.getElementById(`color${i}`);
         const picker = document.getElementById(`colorPicker${i}`);
@@ -51,6 +59,13 @@ function saveToLocalStorage() {
     
     window.location.href= '../library.html';
 };
+
+
+// Creates new user UUID
+function generateUUID() {
+    let newUUID = crypto.randomUUID();
+    localStorage.setItem('UUID', newUUID);
+}
 
 
 export { libraryWrapper, singlePalette };

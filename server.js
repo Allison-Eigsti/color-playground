@@ -14,3 +14,5 @@ app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
     console.log('Press Ctrl+C to end this process.')
 })
+
+// Sample json info for GET request
