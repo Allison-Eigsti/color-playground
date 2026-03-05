@@ -68,4 +68,4 @@ function generateUUID() {
 }
 
 
-export { libraryWrapper, singlePalette };
+export { libraryWrapper, singlePalette, user };
