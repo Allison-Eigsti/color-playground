@@ -33,17 +33,6 @@
     ]
   },
   {
-    "user": "john",
-    "id": 1773916583416,
-    "title": "My Palette",
-    "colors": [
-      "#1414f1",
-      "#380a0a",
-      "#d26565",
-      "#e1c019"
-    ]
-  },
-  {
     "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
     "id": 1773920066935,
     "title": "Allie1",
@@ -63,39 +52,6 @@
       "#eae54d",
       "#87f7b8",
       "#8ac9f0"
-    ]
-  },
-  {
-    "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
-    "id": 1773920670557,
-    "title": "Dad",
-    "colors": [
-      "#941e1e",
-      "#cf3a3a",
-      "#aa0e0e",
-      "#6e0202"
-    ]
-  },
-  {
-    "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
-    "id": 1773920746440,
-    "title": "Dad",
-    "colors": [
-      "#704343",
-      "#af9292",
-      "#d7b7b7",
-      "#f5b3b3"
-    ]
-  },
-  {
-    "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
-    "id": 1773920931503,
-    "title": "Mom",
-    "colors": [
-      "#9ec337",
-      "#6f9be2",
-      "#e6b6ec",
-      "#4ef48d"
     ]
   },
   {
