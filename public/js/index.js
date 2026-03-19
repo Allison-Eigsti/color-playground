@@ -1,16 +1,4 @@
-import { load } from './library.js';
-
 const user = localStorage.getItem('UUID');
-
-const singlePalette = {
-    user: user,
-    id: Date.now(),
-    title: '',
-    colors: ['', '', '', '']
-}
-
-const libraryWrapper = document.getElementById('library-wrapper');
-
 const form = document.querySelector('form');
 
 
@@ -20,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         generateUUID();
     }
 
+    // Loop through divs to change background color based on user input
     for (let i = 1; i <= 4; i++) {
         const color = document.getElementById(`color${i}`);
         const picker = document.getElementById(`colorPicker${i}`);
@@ -32,13 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
             picker.addEventListener('input', (event) => {
                 const colorValue = event.target.value;
                 color.style.backgroundColor = colorValue;
-                singlePalette.colors[i - 1] = colorValue;
             })
         }
-    }
-
-    if (libraryWrapper) {
-        load(); 
     }
 
     if (form) {
@@ -64,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const response = await fetch('http://localhost:8000/api/palettes', {
+                const res = await fetch('http://localhost:8000/api/palettes', {
                     method: 'POST',
                     headers: {
                         'Content-type': 'application/json',
@@ -72,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(newPalette)
                 });
 
-                if (response.ok) {
-                    window.location.href = './library.html';
+                if (res.ok) {
+                    window.location.href = '../library.html';
                 }
             }
             catch (error) {
@@ -84,22 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-// function saveToLocalStorage() {
-//     const title = document.getElementById('palette-title').value || 'Untitled Palette';
-//     singlePalette.title = `${title}`;
-    
-//     let newPalette = {...singlePalette, colors: [...singlePalette.colors]};
-
-//     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
-
-//     loadExistingPalettes.push(newPalette);
-
-//     localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
-    
-//     window.location.href= '../library.html';
-// };
-
-
 // Creates new user UUID
 function generateUUID() {
     let newUUID = crypto.randomUUID();
@@ -107,4 +75,4 @@ function generateUUID() {
 }
 
 
-export { libraryWrapper, singlePalette, user };
+export { user };

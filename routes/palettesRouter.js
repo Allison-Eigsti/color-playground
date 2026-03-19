@@ -16,7 +16,8 @@ const palettesFilePath = path.join(
 );
 
 
-// HF: get all
+// HELPER FUNCTIONS
+// 1. Retrieve any existing palettes from json file
 async function getAllPalettes() {
     const palettesData = await fs.readFile(palettesFilePath, 'utf-8');
 
@@ -25,7 +26,28 @@ async function getAllPalettes() {
     return JSON.parse(palettesData)
 }
 
-// Route: GET all palettes
+// 2. Create new palette
+function createPalette(requestBody) {
+    const { user, title, colors } = requestBody;
+
+    if (!title || !user || !Array.isArray(colors) || colors.length !== 4) {
+        return undefined
+    }
+
+    //Add more data validation? (make sure colors are in correct format and check for repeat/valid titles etc...)
+
+    return {
+        user,
+        id : Date.now(),
+        title,
+        colors
+    }
+}
+
+
+
+// ROUTES
+// GET all palettes
 router.get('/', async (req, res, next) => {
     try {
         const palettes = await getAllPalettes();
@@ -35,7 +57,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-// Route: GET specific palette by id
+// GET specific palette by id
 router.get('/:id', async (req, res, next) => {
     try {
         const id = parseInt(req.params.id);
@@ -55,28 +77,7 @@ router.get('/:id', async (req, res, next) => {
     }
 })
 
-
-// HF: Create new palette
-
-function createPalette(requestBody) {
-    const { user, title, colors } = requestBody;
-
-    if (!title || !user || !Array.isArray(colors) || colors.length !== 4) {
-        return undefined
-    }
-
-    // add check if palette has exactly 4 colors... (maybe on frontend?)
-
-    return {
-        user,
-        id : Date.now(),
-        title,
-        colors
-    }
-}
-
 // POST route: create new palette
-// figure out how to link form data on front end to here...)
 router.post('/', async (req, res, next) => {
     try {
         if (!req.body) {
@@ -106,9 +107,7 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-
-
-// PUT route to edit palette
-// DELETE route to delete palettes
+// PUT route to edit specific palette
+// DELETE route to delete a palette
 
 export default router;
