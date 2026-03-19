@@ -1,7 +1,5 @@
 import express from 'express';
-// not using rn
-import path from 'path';
-import palettes from './routes/palettes.js';
+import palettesRouter from './routes/palettesRouter.js';
 import logger from './middleware/logger.js';
 import errorHandler from './middleware/error.js';
 import notFound from './middleware/notFound.js';
@@ -20,18 +18,16 @@ app.use(logger);
 // Set up static folder
 app.use(express.static('public'));
 
+// Routes ... why does this work with palettes and not router?
+app.use('/api/palettes', palettesRouter);
+
+// Error Handler middlware
+app.use(notFound);
+app.use(errorHandler);
+
 
 // Set up server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
     console.log('Press Ctrl+C to end this process.')
 })
-
-
-// Routes ... why does this work with palettes and not router?
-app.use('/api/palettes', palettes);
-
-
-// Error Handler middlware
-app.use(notFound);
-app.use(errorHandler);
