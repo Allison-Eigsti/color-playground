@@ -24,8 +24,10 @@ async function loadExistingPalettes() {
 
         const parsedData = await res.json();
         console.log(parsedData);
-        // next steps: dynamically populate the HTML with the parsed data
+        // next steps: dynamically display palettes with the parsed data
         // add event listeners for edit/delete requests
+        // Hey Danny! A question... would you recommend not to using .innerHTML as I generate/display the color palettes (like I did the first time, as you can see in my old code)?
+        // Or does it not matter as much since this is just a small project and in the future I plan to use Angular?
     }
     catch (error) {
         console.error('Error fetching palettes:', error.message);
