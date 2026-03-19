@@ -35,10 +35,31 @@
         <section class="main-content column">
             <h2 class="center">Click a box to select a color...</h2>
 
-            <input id="palette-title" type="text" placeholder="Palette Name" class="center">
+
+            <form>
+                <input type="text" name="title" id="title" placeholder="Palette Name" class="center">
+
+                <div class="palette-wrapper">
+                    <div class="box" id="color1">Color 1</div>
+                        <input name="color1" type="color" id="colorPicker1" style="display: none;">
+                    <div class="box" id="color2">Color 2</div>
+                        <input name="color2" type="color" id="colorPicker2" style="display: none;">
+                    <div class="box" id="color3">Color 3</div>
+                        <input name="color3" type="color" id="colorPicker3" style="display: none;">
+                    <div class="box" id="color4">Color 4</div>
+                        <input name="color4" type="color" id="colorPicker4" style="display: none;">
+                </div>
+            
+            <div class="btn-wrapper">
+                <button type="submit">Save to your Library</button>
+            </div>
+
+            </form>
+
+            <!-- <input id="palette-title" type="text" placeholder="Palette Name" class="center"> -->
 
 
-            <div class="palette-wrapper">
+            <!-- <div class="palette-wrapper">
                 <div class="box" id="color1">Color 1</div>
                     <input type="color" id="colorPicker1" style="display: none;">
                 <div class="box" id="color2">Color 2</div>
@@ -56,7 +77,7 @@
                     <input type="email" id="email" name="email" placeholder="example@gmail.com">
                     <button type="submit">Save to the Cloud</button>
                 </form>
-            </div>
+            </div> -->
              
         </section>
     </main>

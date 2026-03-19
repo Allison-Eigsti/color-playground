@@ -2,8 +2,6 @@ import { load } from './library.js';
 
 const user = localStorage.getItem('UUID');
 
-const saveBtn = document.getElementById('saveToLocalStorage');
-
 const singlePalette = {
     user: user,
     id: Date.now(),
@@ -12,6 +10,8 @@ const singlePalette = {
 }
 
 const libraryWrapper = document.getElementById('library-wrapper');
+
+const form = document.querySelector('form');
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,31 +34,70 @@ document.addEventListener('DOMContentLoaded', () => {
                 color.style.backgroundColor = colorValue;
                 singlePalette.colors[i - 1] = colorValue;
             })
-
-            saveBtn.addEventListener('click', saveToLocalStorage);
         }
     }
 
     if (libraryWrapper) {
         load(); 
     }
+
+    if (form) {
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            if (!user) {
+                console.error('No user found.')
+                return;
+            }
+            
+            const data = new FormData(form);
+
+            const newPalette = {
+                user: user,
+                title: data.get('title'),
+                colors: [
+                    data.get('color1'),
+                    data.get('color2'),
+                    data.get('color3'),
+                    data.get('color4'),
+                ]
+            }
+
+            try {
+                const response = await fetch('http://localhost:8000/api/palettes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify(newPalette)
+                });
+
+                if (response.ok) {
+                    window.location.href = './library.html';
+                }
+            }
+            catch (error) {
+                console.error(error.message)
+            }
+        })
+    }
 })
 
 
-function saveToLocalStorage() {
-    const title = document.getElementById('palette-title').value || 'Untitled Palette';
-    singlePalette.title = `${title}`;
+// function saveToLocalStorage() {
+//     const title = document.getElementById('palette-title').value || 'Untitled Palette';
+//     singlePalette.title = `${title}`;
     
-    let newPalette = {...singlePalette, colors: [...singlePalette.colors]};
+//     let newPalette = {...singlePalette, colors: [...singlePalette.colors]};
 
-    let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
+//     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
 
-    loadExistingPalettes.push(newPalette);
+//     loadExistingPalettes.push(newPalette);
 
-    localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
+//     localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
     
-    window.location.href= '../library.html';
-};
+//     window.location.href= '../library.html';
+// };
 
 
 // Creates new user UUID
