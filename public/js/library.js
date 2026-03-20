@@ -24,8 +24,6 @@ async function loadExistingPalettes() {
 
         const parsedData = await res.json();
         const userPalettes = parsedData.filter((palette) => palette.user === user)
-        console.log(parsedData);
-        console.log(userPalettes);
 
         // Check if user has created any palettes
         if (userPalettes.length === 0) {
@@ -37,6 +35,7 @@ async function loadExistingPalettes() {
         // Dynamically display all user palettes
         userPalettes.reverse();
         userPalettes.forEach(palette => {
+            console.log(palette);
             let paletteInfo = document.createElement('div');
             paletteInfo.classList.add('palette-wrapper');
             paletteInfo.innerHTML = `
@@ -78,7 +77,6 @@ async function loadExistingPalettes() {
             for (let i = 1; i <= 4; i++) {
                 let color = paletteInfo.querySelector(`[data-color="color${i}"]`);
                 let picker = paletteInfo.querySelector(`[data-picker="colorPicker${i}"]`);
-                let initialColor = color.textContent;
                 let paletteTitle = paletteInfo.querySelector('.palette-title').textContent;
             
                 if (color && picker) {
@@ -88,12 +86,12 @@ async function loadExistingPalettes() {
             
                     picker.addEventListener('input', (event) => {
                         const colorValue = event.target.value;
+                        let initialColor = color.textContent;
                         let colorCode = color.querySelector('.color-code');
                         color.style.backgroundColor = colorValue;
                         colorCode.textContent = colorValue;
-                        console.log(`colorCode = ${colorCode}`);
                         if (initialColor !== colorValue) {
-                            updateColor(initialColor, colorValue);
+                            updateColor(initialColor, colorValue, paletteTitle, palette.id);
                         }
                     })
                 }
@@ -107,8 +105,8 @@ async function loadExistingPalettes() {
 }
 
 
-function updateColor(initialColor, newColor) {
-    console.log(`You need to update the color: ${initialColor} to ${newColor}`);
+function updateColor(initialColor, newColor, paletteTitle, paletteId) {
+    console.log(`You need to update the color: ${initialColor} to ${newColor}. I can access the palette title: ${paletteTitle} and palette info: ${paletteId}`);
 }
 
         // next steps: 
