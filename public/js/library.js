@@ -23,16 +23,71 @@ async function loadExistingPalettes() {
         }
 
         const parsedData = await res.json();
+        const userPalettes = parsedData.filter((palette) => palette.user === user)
+
+        // Check if user has created any palettes
+        if (userPalettes.length === 0) {
+            libraryWrapper.innerHTML = `<div class="alert alert-warning" role="alert">
+                                 Your color library is empty. Click 'Create New Palette' to make a color palette.</div>`  
+        }
+
+        // Dynamically display all user palettes
+        userPalettes.reverse();
+        userPalettes.forEach(palette => {
+            let paletteInfo = document.createElement('div');
+            paletteInfo.classList.add('palette-wrapper');
+            paletteInfo.innerHTML = `
+            <h2 class="palette-title" id="${palette.title}">${palette.title}</h2>
+        <div class="box-wrapper">
+        <div class="box" data-color="color1" style="background-color: ${palette.colors[0]};">
+        <span class="color-code">${palette.colors[0]}</span>
+            <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
+            <input type="color" data-picker="colorPicker1" style="display: none;">
+            <div class="overlay"></div>
+            </div>
+        <div class="box" data-color="color2" style="background-color: ${palette.colors[1]};">
+            <span class="color-code">${palette.colors[1]}</span>
+            <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
+            <div class="overlay"></div>
+            </div>
+            <input type="color" data-picker="colorPicker2" style="display: none;">        
+        <div class="box" data-color="color3" style="background-color: ${palette.colors[2]};">
+            <span class="color-code">${palette.colors[2]}</span>
+            <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
+            <div class="overlay"></div>            
+            </div>
+            <input type="color" data-picker="colorPicker3" style="display: none;">
+        <div class="box" data-color="color4" style="background-color: ${palette.colors[3]};">
+            <span class="color-code">${palette.colors[3]}</span>
+            <img src="/assets/icons/edit-icon.png" alt="Edit" class="hover-edit">
+            <div class="overlay"></div>
+            </div>
+            <input type="color" data-picker="colorPicker4" style="display: none;">
+        </div>
+        <div class="btn-wrapper">
+            <button class="contrast-btn btn btn-light" data-id="${palette.id}">Check Palette Accessability</button>
+            <button class="delete-btn btn btn-light">Delete</button>
+        </div>`
+
+            libraryWrapper.appendChild(paletteInfo);
+        });
+        
         console.log(parsedData);
+        console.log(userPalettes);
+    }
+        // filter by user
+        // if (parsedData.length === 0) -> make alert that there are no palettes
+        // else populate them
+
+
+
         // next steps: dynamically display palettes with the parsed data (important: filter by user)
         // add event listeners for edit/delete requests
-        // Hey Danny! A question... would you recommend not to using .innerHTML as I generate/display the color palettes (like I did the first time, as you can see in my old code)?
-        // Or does it not matter as much since this is just a small project and in the future I plan to use Angular?
-    }
     catch (error) {
         console.error('Error fetching palettes:', error.message);
     }
 }
+
 
 // old code
 // function load() {
