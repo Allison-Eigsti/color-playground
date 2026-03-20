@@ -107,7 +107,13 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-// PUT route to edit specific palette
+// // PUT route to edit specific palette
+// router.put('/:id', (req, res, next) => {
+//     const paletteId = parseInt(req.params.id)
+//     const colorToUpdate = 
+
+// })
+
 // DELETE route to delete a palette
 
 export default router;

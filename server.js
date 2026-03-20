@@ -18,10 +18,10 @@ app.use(logger);
 // Set up static folder
 app.use(express.static('public'));
 
-// Routes ... why does this work with palettes and not router?
+// Routes
 app.use('/api/palettes', palettesRouter);
 
-// Error Handler middlware
+// Error Handler middlware (note to self: must come after routes)
 app.use(notFound);
 app.use(errorHandler);
 
