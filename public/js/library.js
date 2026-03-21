@@ -35,7 +35,6 @@ async function loadExistingPalettes() {
         // Dynamically display all user palettes
         userPalettes.reverse();
         userPalettes.forEach(palette => {
-            console.log(palette);
             let paletteInfo = document.createElement('div');
             paletteInfo.classList.add('palette-wrapper');
             paletteInfo.innerHTML = `
@@ -91,7 +90,14 @@ async function loadExistingPalettes() {
                         color.style.backgroundColor = colorValue;
                         colorCode.textContent = colorValue;
                         if (initialColor !== colorValue) {
-                            updateColor(initialColor, colorValue, paletteTitle, palette.id);
+                            // need to add await?
+                            console.log(palette.colors);
+                            console.log(color);
+
+                            // index of color to change in 'colors' array
+                            const index = i - 1;
+
+                            updateColor(palette.id, index, colorValue);
                         }
                     })
                 }
@@ -105,8 +111,9 @@ async function loadExistingPalettes() {
 }
 
 
-function updateColor(initialColor, newColor, paletteTitle, paletteId) {
-    console.log(`You need to update the color: ${initialColor} to ${newColor}. I can access the palette title: ${paletteTitle} and palette info: ${paletteId}`);
+async function updateColor(paletteId, index, newColor) {
+    //find index of the color to update here and then send the index (paletteId, colors.index, newColor, initialColor) -don't think I need paletteTitle
+    console.log(`You need to update the color to ${newColor}. I can access the palette id: ${paletteId} and the index is ${index}`);
 }
 
         // next steps: 

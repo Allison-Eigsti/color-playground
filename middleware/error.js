@@ -6,6 +6,7 @@ const errorHandler = (err, req, res, next) => {
         res.status(500).json({ msg: 'Data file not found.' });
     }
     else {
+        console.error(err.message)
         res.status(500).json({ msg: 'Internal server error.' });
     }
 }

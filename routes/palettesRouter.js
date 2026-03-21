@@ -108,11 +108,32 @@ router.post('/', async (req, res, next) => {
 });
 
 // // PUT route to edit specific palette
-// router.put('/:id', (req, res, next) => {
-//     const paletteId = parseInt(req.params.id)
-//     const colorToUpdate = 
+router.put('/:id/colors/:index', async (req, res, next) => {
+    const paletteId = parseInt(req.params.id);
+    const index = parseInt(req.params.index);
+    const { newColor } = req.body
 
-// })
+    try {
+        const palettes = await getAllPalettes();
+        const palette = palettes.find((palette) => palette.id === paletteId);
+
+        if (!palette) {
+        const error = new Error(`Error. The palette with the if of ${paletteId} does not exist.`)
+        error.status = 404;
+        return next(error);
+        }
+
+        palette.colors[index] = newColor;
+
+        await fs.writeFile(palettesFilePath, JSON.stringify(palettes, null, 2));
+
+        res.status(200).json({ message: 'Color updated successfully', palette })
+    }
+    catch (error) {
+        console.error(error.message)
+        next(error);
+    }
+})
 
 // DELETE route to delete a palette
 
