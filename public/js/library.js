@@ -76,7 +76,6 @@ async function loadExistingPalettes() {
             for (let i = 1; i <= 4; i++) {
                 let color = paletteInfo.querySelector(`[data-color="color${i}"]`);
                 let picker = paletteInfo.querySelector(`[data-picker="colorPicker${i}"]`);
-                let paletteTitle = paletteInfo.querySelector('.palette-title').textContent;
             
                 if (color && picker) {
                     color.addEventListener('click', () => {
@@ -102,11 +101,41 @@ async function loadExistingPalettes() {
                     })
                 }
             }
+
+        
+        // Delete button
+        const deleteBtn = paletteInfo.querySelector('.delete-btn');
+        // define palette id here so i can pass it in
+
+        deleteBtn.addEventListener('click', ()=> {
+            console.log(palette.id);
+            if (confirm('Are you sure you want to delete this palette?'))
+            deletePalette(palette.id);
+        })
+
         });
         }
     }
     catch (error) {
         console.error('Error fetching palettes:', error.message);
+    }
+}
+
+async function deletePalette(id) {
+    try {
+        const res = await fetch(`http://localhost:8000/api/palettes/${id}`, {
+            method: 'delete'
+        })
+
+
+        if (!res.ok) {
+            throw new Error(`Error deleting palette with id of ${id}: status: ${res.status}`)  
+        }
+
+        window.location.href= '../library.html'
+    }
+    catch (error) {
+        console.error('Error deleting palette', error.message);
     }
 }
 
@@ -131,7 +160,7 @@ async function updateColor(id, index, newColor) {
 }
 
         // next steps: 
-        // add event listeners for edit/delete requests
+        // add event listeners for delete requests
         // add back in dropdown menu functionality
         // Add contrast checker button and load contrast page with specific palette
 
@@ -250,14 +279,7 @@ async function updateColor(id, index, newColor) {
 //     })
 // }
 
-// function editLocalStorage(paletteTitle, colorValue, initialColor) {
-//     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
-//     let palette = loadExistingPalettes.find((palette) => palette.title === paletteTitle);
-//     let index = palette.colors.findIndex((color) => color === initialColor);
-//     palette.colors.splice(index, 1, colorValue);
 
-//     localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
-// }
 
 // function deletePalette(paletteTitle) {
 //     let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];

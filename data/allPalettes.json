@@ -44,17 +44,6 @@
     ]
   },
   {
-    "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
-    "id": 1773925241420,
-    "title": "xiangyi",
-    "colors": [
-      "#adb2d7",
-      "#7478dc",
-      "#d3d97d",
-      "#f5cd3d"
-    ]
-  },
-  {
     "user": "2d0cea32-520f-4358-af30-1f62149cb47c",
     "id": 1773925466327,
     "title": "incognito",
@@ -74,50 +63,6 @@
       "#744444",
       "#af4b4b",
       "#b96464"
-    ]
-  },
-  {
-    "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
-    "id": 1773927883736,
-    "title": "neww",
-    "colors": [
-      "#591717",
-      "#6d5555",
-      "#7c3c3c",
-      "#ba4f4f"
-    ]
-  },
-  {
-    "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
-    "id": 1773927950065,
-    "title": "newww",
-    "colors": [
-      "#832525",
-      "#4c2020",
-      "#2f0909",
-      "#a73939"
-    ]
-  },
-  {
-    "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
-    "id": 1773928008798,
-    "title": "lksjlkfdas",
-    "colors": [
-      "#520f0f",
-      "#5e2b2b",
-      "#a23434",
-      "#6b2e2e"
-    ]
-  },
-  {
-    "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
-    "id": 1774002192898,
-    "title": "Friday",
-    "colors": [
-      "#f5f0f0",
-      "#f5adad",
-      "#f00505",
-      "#c4b0b0"
     ]
   }
 ]
