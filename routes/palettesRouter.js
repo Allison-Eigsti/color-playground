@@ -26,7 +26,21 @@ async function getAllPalettes() {
     return JSON.parse(palettesData)
 }
 
-// 2. Create new palette
+// 2. Get a specific palette
+async function getPaletteById(id) {
+    const palettes = await getAllPalettes();
+    const palette = palettes.find((palette) => palette.id === id)
+        
+        if (!palette) {
+            const error = new Error(`A palette with the id of ${id} was not found`);
+            error.status = 404;
+            throw error;
+        }
+
+        return palette;
+}
+
+// 3. Create new palette
 function createPalette(requestBody) {
     const { user, title, colors } = requestBody;
 
@@ -46,6 +60,8 @@ function createPalette(requestBody) {
 
 
 
+
+
 // ROUTES
 // GET all palettes
 router.get('/', async (req, res, next) => {
@@ -57,25 +73,6 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-// GET specific palette by id
-router.get('/:id', async (req, res, next) => {
-    try {
-        const id = parseInt(req.params.id);
-        const palettes = await getAllPalettes();
-        const palette = palettes.find((palette) => palette.id === id)
-        
-        if (!palette) {
-            const error = new Error(`A palette with the id of ${id} was not found`);
-            error.status = 404;
-            return next(error);
-        }
-        
-        res.status(200).json(palette);
-    }
-    catch (error) {
-        next(error);
-    }
-})
 
 // POST route: create new palette
 router.post('/', async (req, res, next) => {
@@ -107,7 +104,7 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-// // PUT route to edit specific palette
+// PUT route to edit specific palette
 router.put('/:id/colors/:index', async (req, res, next) => {
     const paletteId = parseInt(req.params.id);
     const index = parseInt(req.params.index);
@@ -115,13 +112,7 @@ router.put('/:id/colors/:index', async (req, res, next) => {
 
     try {
         const palettes = await getAllPalettes();
-        const palette = palettes.find((palette) => palette.id === paletteId);
-
-        if (!palette) {
-        const error = new Error(`Error. The palette with the if of ${paletteId} does not exist.`)
-        error.status = 404;
-        return next(error);
-        }
+        const palette = await getPaletteById(paletteId);
 
         palette.colors[index] = newColor;
 
@@ -136,5 +127,22 @@ router.put('/:id/colors/:index', async (req, res, next) => {
 })
 
 // DELETE route to delete a palette
+router.delete('/:id', async (req, res, next) => {
+    const paletteId = parseInt(req.params.id);
+
+    try {
+        await getPaletteById(paletteId);
+
+        const palettes = await getAllPalettes();
+        const updatedPalettes = palettes.filter((palette) => palette.id !== paletteId);
+
+        await fs.writeFile(palettesFilePath, JSON.stringify(updatedPalettes, null, 2));
+
+        res.status(200).json({ message: 'Palette deleted successfully', updatedPalettes});
+    }
+    catch (error) {
+        next(error);
+    }
+})
 
 export default router;
