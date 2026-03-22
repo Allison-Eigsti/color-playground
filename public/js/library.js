@@ -111,9 +111,23 @@ async function loadExistingPalettes() {
 }
 
 
-async function updateColor(paletteId, index, newColor) {
-    //find index of the color to update here and then send the index (paletteId, colors.index, newColor, initialColor) -don't think I need paletteTitle
-    console.log(`You need to update the color to ${newColor}. I can access the palette id: ${paletteId} and the index is ${index}`);
+async function updateColor(id, index, newColor) {
+    try {
+        const res = await fetch(`http://localhost:8000/api/palettes/${id}/colors/${index}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({ newColor })
+        })
+
+        if (!res.ok) {
+            throw new Error(`Error updating palette with id of ${id}: status: ${res.status}`)
+        }
+    }
+    catch (error) {
+        console.error('Error editing color:', error.message);
+    }
 }
 
         // next steps: 
