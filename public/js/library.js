@@ -1,34 +1,40 @@
-import { libraryWrapper } from "./index.js";
+import { user } from "./index.js";
 
-const dropdown = document.querySelector('.dropdown');
-const dropdownMenu = document.querySelector('.dropdown-menu');
-const dropdownMenuButton = document.querySelector('#dropdownMenuButton');
+const libraryWrapper = document.getElementById('library-wrapper');
 
-// Load and display all saved palettes in color library 
-function load() {
+// const dropdown = document.querySelector('.dropdown');
+// const dropdownMenu = document.querySelector('.dropdown-menu');
+// const dropdownMenuButton = document.querySelector('#dropdownMenuButton');
 
-    // Retrieve from local storage and parse into JSON objects 
-    let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
-
-    // If no previously saved palettes display 'empty library' alert 
-    if (loadExistingPalettes.length === 0) {
-        dropdown.style.display = 'none';
-        libraryWrapper.innerHTML = `<div class="alert alert-warning" role="alert">
-                                    Your color library is empty. Click 'Create New Palette' to make a color palette.</div>`
+window.addEventListener('DOMContentLoaded', () => {
+    if (libraryWrapper) {
+        loadExistingPalettes();
     }
-    else {
-        // Reverse order of palettes so newest ones appear at the top of page 
-        loadExistingPalettes.reverse();        
-        loadExistingPalettes.forEach(palette => {
-            // Dropdown menu
-            let newDropdownItem = document.createElement('a');
-            // Add new dropdown item (new palette title) to dropdown menu 
-            newDropdownItem.classList.add('dropdown-item');
-            newDropdownItem.href = `#${palette.title}`;
-            newDropdownItem.textContent = `${palette.title}`;
-            dropdownMenu.appendChild(newDropdownItem);
+})
 
-            // Dynamically generate color palettes that have been saved to local storage
+async function loadExistingPalettes() {
+    try {
+        const res = await fetch('http://localhost:8000/api/palettes', {
+            method: 'GET'
+        })
+
+        if (!res.ok) {
+            throw new Error(`Error fetching palettes: status: ${res.status}`)
+        }
+
+        const parsedData = await res.json();
+        const userPalettes = parsedData.filter((palette) => palette.user === user)
+
+        // Check if user has created any palettes
+        if (userPalettes.length === 0) {
+            libraryWrapper.innerHTML = `<div class="alert alert-warning" role="alert">
+                                 Your color library is empty. Click 'Create New Palette' to make a color palette.</div>`  
+        }
+
+        else {
+        // Dynamically display all user palettes
+        userPalettes.reverse();
+        userPalettes.forEach(palette => {
             let paletteInfo = document.createElement('div');
             paletteInfo.classList.add('palette-wrapper');
             paletteInfo.setAttribute('data-id', `${palette.id}`)
@@ -67,14 +73,11 @@ function load() {
 
             libraryWrapper.appendChild(paletteInfo);
 
-            // Edit color palettes- loop through each palette box
+        // dynamically edit color palettes
             for (let i = 1; i <= 4; i++) {
                 let color = paletteInfo.querySelector(`[data-color="color${i}"]`);
                 let picker = paletteInfo.querySelector(`[data-picker="colorPicker${i}"]`);
-                let colorCode = paletteInfo.querySelector(`[data-code="code${i}"]`);
-                let paletteId = parseInt(paletteInfo.getAttribute('data-id'));
-
-                // Each box listens for click and pulls up colorpicker input
+            
                 if (color && picker) {
                     color.addEventListener('click', () => {
                         picker.click();
@@ -83,80 +86,81 @@ function load() {
                     // If color is changed, new background color and color code are displayed
                     picker.addEventListener('input', (event) => {
                         const colorValue = event.target.value;
+                        let initialColor = color.textContent;
+                        let colorCode = color.querySelector('.color-code');
                         color.style.backgroundColor = colorValue;
                         colorCode.textContent = colorValue;
+                        if (initialColor !== colorValue) {
+                            // need to add await?
+                            console.log(palette.colors);
+                            console.log(color);
 
-                        //AI citation: used ChatGPT to fix editing bug (colorIndex (i - 1) passed as a parameter instead of initalColor)
-                        editLocalStorage(paletteId, i - 1, colorValue);
+                            // index of color to change in 'colors' array
+                            const index = i - 1;
+
+                            updateColor(palette.id, index, colorValue);
+                        }
                     })
                 }
             }
-            
 
-            // Check accessability button
-            const contrastBtn = paletteInfo.querySelector('.contrast-btn');
-            contrastBtn.addEventListener('click', (e) => {
-                // Appends palette id as a URL query parameter and loads contrast page with the selected color palette
-                const id = e.target.getAttribute('data-id');
-                window.location.href= `../contrast.html?id=${id}`;
-            })
+        
+        // Delete button
+        const deleteBtn = paletteInfo.querySelector('.delete-btn');
+        // define palette id here so i can pass it in
 
-            // Delete button
-            const deleteBtn = paletteInfo.querySelector('.delete-btn');
-            const paletteTitle = paletteInfo.querySelector('.palette-title').textContent;
-            deleteBtn.addEventListener('click', (e) => {
-                const id = parseInt(e.target.getAttribute('data-id'));
-                // Pop up warning before deletion
-                if (confirm('Are you sure you want to delete this palette?'))
-                deletePalette(paletteTitle, id);
-            });
+        deleteBtn.addEventListener('click', ()=> {
+            console.log(palette.id);
+            if (confirm('Are you sure you want to delete this palette?'))
+            deletePalette(palette.id);
+        })
+
         });
-    }
-
-    //Dropdown event listener 
-    dropdownMenuButton.addEventListener('click', () => {
-        // Dropdown menu displays on click
-        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-    })
-
-    // When user clicks outside of dropdown menu, it is hidden again
-    window.addEventListener('click', (e) => {
-        if (!e.target.matches('#dropdownMenuButton')) {
-            dropdownMenu.style.display = 'none';
         }
-    })
+    }
+    catch (error) {
+        console.error('Error fetching palettes:', error.message);
+    }
 }
 
-// Edit color palette
-function editLocalStorage(paletteId, colorIndex, colorValue) {
-    // Retrieve all palettes from local storage
-    let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
+async function deletePalette(id) {
+    try {
+        const res = await fetch(`http://localhost:8000/api/palettes/${id}`, {
+            method: 'delete'
+        })
 
-    // Find specific palette to edit by id
-    let palette = loadExistingPalettes.find((palette) => parseInt(palette.id) === paletteId);
 
-    if (!palette) return;
+        if (!res.ok) {
+            throw new Error(`Error deleting palette with id of ${id}: status: ${res.status}`)  
+        }
 
-    // Swap out old color for new one
-    palette.colors[colorIndex] = colorValue;
-    localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
-}
-
-// Delete specific color palette
-function deletePalette(paletteTitle, paletteId) {
-    let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
-    // Find palette by id and title
-    let palette = loadExistingPalettes.find((palette) => parseInt(palette.id) === paletteId && palette.title === paletteTitle);
-    let paletteIndex = loadExistingPalettes.findIndex((paletteToRemove) => paletteToRemove === palette);
-
-    // Remove palette to delete from array of palettes
-    loadExistingPalettes.splice(paletteIndex, 1);
-
-    localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
-
-    // Reload library without old palette
-    window.location.href= '../library.html';
+        window.location.href= '../library.html'
+    }
+    catch (error) {
+        console.error('Error deleting palette', error.message);
+    }
 }
 
 
-export { load };
+async function updateColor(id, index, newColor) {
+    try {
+        const res = await fetch(`http://localhost:8000/api/palettes/${id}/colors/${index}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({ newColor })
+        })
+
+        if (!res.ok) {
+            throw new Error(`Error updating palette with id of ${id}: status: ${res.status}`)
+        }
+    }
+    catch (error) {
+        console.error('Error editing color:', error.message);
+    }
+}
+
+        // next steps: 
+        // add back in dropdown menu functionality
+        // Add contrast checker button and load contrast page with specific palette

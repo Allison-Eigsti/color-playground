@@ -41,23 +41,26 @@
         <section class="main-content column">
             <h2 class="center">Click a box to select a color...</h2>
 
-            <input id="palette-title" type="text" placeholder="Palette Name" class="center">
 
+            <form>
+                <input type="text" name="title" id="title" placeholder="Palette Name" class="center">
 
-            <div class="palette-wrapper">
-                <div class="box" id="color1"><span class="color-code">Color 1</span></div>
-                    <input type="color" id="colorPicker1" style="display: none;">
-                <div class="box" id="color2"><span class="color-code">Color 2</span></div>
-                    <input type="color" id="colorPicker2" style="display: none;">
-                <div class="box" id="color3"><span class="color-code">Color 3</span></div>
-                    <input type="color" id="colorPicker3" style="display: none;">
-                <div class="box" id="color4"><span class="color-code">Color 4</span></div>
-                    <input type="color" id="colorPicker4" style="display: none;">
-            </div>
-
+                <div class="palette-wrapper">
+                    <div class="box" id="color1">Color 1</div>
+                        <input name="color1" type="color" id="colorPicker1" style="display: none;">
+                    <div class="box" id="color2">Color 2</div>
+                        <input name="color2" type="color" id="colorPicker2" style="display: none;">
+                    <div class="box" id="color3">Color 3</div>
+                        <input name="color3" type="color" id="colorPicker3" style="display: none;">
+                    <div class="box" id="color4">Color 4</div>
+                        <input name="color4" type="color" id="colorPicker4" style="display: none;">
+                </div>
+            
             <div class="btn-wrapper">
-                <button class="btn btn-accent-purple" id="saveToLocalStorage">Save Color Palette to Library</button>
+                <button type="submit">Save to your Library</button>
             </div>
+
+            </form>
              
         </section>
     </main>
