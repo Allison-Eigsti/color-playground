@@ -2,13 +2,24 @@ import { user } from "./index.js";
 
 const libraryWrapper = document.getElementById('library-wrapper');
 
-// const dropdown = document.querySelector('.dropdown');
-// const dropdownMenu = document.querySelector('.dropdown-menu');
-// const dropdownMenuButton = document.querySelector('#dropdownMenuButton');
+const dropdown = document.querySelector('.dropdown');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+const dropdownMenuButton = document.querySelector('#dropdownMenuButton');
 
 window.addEventListener('DOMContentLoaded', () => {
     if (libraryWrapper) {
         loadExistingPalettes();
+
+    // Dropdown event listener 
+    dropdownMenuButton.addEventListener('click', () => {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+    })
+
+    window.addEventListener('click', (e) => {
+        if (!e.target.matches('#dropdownMenuButton')) {
+            dropdownMenu.style.display = 'none';
+        }
+    })
     }
 })
 
@@ -27,6 +38,7 @@ async function loadExistingPalettes() {
 
         // Check if user has created any palettes
         if (userPalettes.length === 0) {
+            dropdown.style.display = 'none';
             libraryWrapper.innerHTML = `<div class="alert alert-warning" role="alert">
                                  Your color library is empty. Click 'Create New Palette' to make a color palette.</div>`  
         }
@@ -35,6 +47,13 @@ async function loadExistingPalettes() {
         // Dynamically display all user palettes
         userPalettes.reverse();
         userPalettes.forEach(palette => {
+        // Dropdown menu
+            let newDropdownItem = document.createElement('a');
+            newDropdownItem.classList.add('dropdown-item');
+            newDropdownItem.href = `#${palette.title}`;
+            newDropdownItem.textContent = `${palette.title}`;
+            dropdownMenu.appendChild(newDropdownItem);
+            
             let paletteInfo = document.createElement('div');
             paletteInfo.classList.add('palette-wrapper');
             paletteInfo.setAttribute('data-id', `${palette.id}`)

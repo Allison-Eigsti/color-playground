@@ -57,6 +57,12 @@ The Color Playground has the following file structure:
 
 ```python
 color-playground
+├─ data
+│  └─ allPalettes.json
+├─ middleware
+│  ├─ error.js
+│  ├─ logger.js
+│  └─ notFound.js
 ├─ node_modules
 ├─ public
 │  ├─ assets
@@ -82,47 +88,23 @@ color-playground
 │  ├─ library.html
 │  ├─ playground.html
 │  └─ playground2.html
+├─ routes
+│  └─ palettesRouter.json
 ├─ package.json
 ├─ README.md
 └─ server.js
 ```
 
-## Capstone Requirements
+### Future Plans
 
-1. Analyze Data Stored in Arrays:
-   - All of the user's color palettes are stored in an array of objects. Each object contains an id, a title, and an additional array of colors (hex codes).
-   - I used array methods such as .forEach(), .findIndex(), and .splice(), to display, edit, and delete the color palettes from the user's color library.
+In the future, I aim to use a relational database, like PostgreSQL, to store the users' color palettes. Eventually, I would also like to revamp the user interface with Vue or React.
 
-2. Persist Data to Local Storage:
-   - After a user selects four colors to save in a color palette, the hex codes are saved in a palette object in local storage. The palettes are then displayed on the color library page for future use.
+The changing methods of data storage in this project reflect my growth journey as a programmer. I originally was using local storage to save the user's color palettes. In the current version of this project, I created an API to store user's data to a JSON file. I also use UUIDs to differentiate users in order to associate certain color palettes with a specific user.
 
-3. Create a Node.js Web Server using Express.js
-   - This application uses a Node.js web server to serve the static HTML files found in the public folder.
 
 ### Code Examples
 
-1. Save Palette to Local Storage:
-
-   ```javascript
-    function saveToLocalStorage() {
-    const title = document.getElementById('palette-title').value || 'Untitled Palette';
-    singlePalette.title = `${title}`;
-    
-    let newPalette = {...singlePalette, colors: [...singlePalette.colors]};
-
-    let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
-
-    loadExistingPalettes.push(newPalette);
-
-    localStorage.setItem('allPalettes', JSON.stringify(loadExistingPalettes));
-    
-    window.location.href= '../library.html';
-    };
-    ```
-
-In this example, the title that the user inputs is saved to an object called 'singlePalette', which already includes 4 colors the user has chosen. The object singlePalette is copied and saved as a variable, newPalette. I then retrieve the previously saved palettes from local storage in a variable called loadExistingPalettes. The newPalette object is then pushed to the array of previously saved palettes, allowing the new palette to be displayed in the color library.
-
-2. GET Request to WebAIM API:
+1. GET Request to WebAIM API:
 
     ```javascript
     if (selectedColors.length < 2) {
@@ -161,12 +143,6 @@ In this example, the title that the user inputs is saved to an object called 'si
 In this code snippet, an asynchronous GET request is made to the WebAIM Contrast Checker API. I use a try... catch block to catch potential runtime errors. Two colors in hex decimals (saved in an array called selectedColors) are sent as query parameters in the API request URL. The request is sent as fetch() and the code awaits an HTTP response. Response.json() is then used to parse the response body into a JavaScript object. The array selectedColors is reset so that the user can repeat the process.
 
 Next, I use the returned data to dynamically update the DOM, using a conditional to display a success alert (Bootstrap) if the colors pass the contrast check and a danger alert if they fail the check. If an error occurs during this process, it is caught and logged to the console.
-
-### Future Plans
-
-In the future, I aim to build out my own API to store user's color palettes in a JSON file. I plan to use cookies and UUIDs to identify different users in order to associate certain color palettes with a specific user. I will need a GET route to display color the color palettes in the user's library, a POST route for creating new palettes, as well as PUT and DELETE routes to edit and delete palettes.
-
-Eventually, I would also like revamp the user interface with React.
 
 ### Citations
 
