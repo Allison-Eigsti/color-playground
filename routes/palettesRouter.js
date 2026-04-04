@@ -73,6 +73,18 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+// GET specific palette
+router.get('/:id', async (req, res, next) => {
+    const id = parseInt(req.params.id);
+    try {
+        const palette = await getPaletteById(id)
+        res.status(200).json(palette);
+    }
+    catch (error) {
+        next(error);
+    }
+})
+
 
 // POST route: create new palette
 router.post('/', async (req, res, next) => {

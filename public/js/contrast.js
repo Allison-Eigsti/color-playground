@@ -4,7 +4,7 @@ const paletteContainer = document.getElementById('palette-container');
 
 let selectedColors = [];
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     // Retrieve color palette id from URL parameters
     const params = new URLSearchParams(window.location.search);
     const id = Number(params.get("id"));
@@ -17,19 +17,23 @@ window.addEventListener('DOMContentLoaded', () => {
     })
 
     // Load palette that was selected on library page
-    loadContrastPalette(id);
+    await loadContrastPalette(id);
 })
 
 
-function loadContrastPalette(id) {
-    let loadExistingPalettes = JSON.parse(localStorage.getItem('allPalettes')) || [];
-    let palette = loadExistingPalettes.find(palette => palette.id === id);
-    
-    if (!palette) {
-        paletteContainer.innerHTML = `This palette was not found.`
-    }
-    else {
+async function loadContrastPalette(id) {
+    try {
+        const res = await fetch(`http://localhost:8000/api/palettes/${id}`, {
+            method: 'GET'
+        })
+
+        if (!res.ok) {
+            paletteContainer.innerHTML = `This palette was not found.`
+            throw new Error(`Error fetching palette: status: ${res.status}`);
+        }
+
         // Display selected palette
+        const palette = await res.json();
         let paletteInfo = document.createElement('div');
         
         paletteInfo.classList.add('palette-wrapper');
@@ -101,9 +105,10 @@ function loadContrastPalette(id) {
         //Add event listener to check contrast button
         const contrastBtn = document.querySelector('.contrast-btn');
         contrastBtn.addEventListener('click', () => checkContrast());
-    };
-
-    console.log(selectedColors);
+    }
+    catch (error) {
+        console.error('Error fetching palette', error.message);
+    }
 }
 
 

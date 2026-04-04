@@ -11,15 +11,15 @@ window.addEventListener('DOMContentLoaded', () => {
         loadExistingPalettes();
 
     // Dropdown event listener 
-    dropdownMenuButton.addEventListener('click', () => {
-        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-    })
+        dropdownMenuButton.addEventListener('click', () => {
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        })
 
-    window.addEventListener('click', (e) => {
-        if (!e.target.matches('#dropdownMenuButton')) {
-            dropdownMenu.style.display = 'none';
-        }
-    })
+        window.addEventListener('click', (e) => {
+            if (!e.target.matches('#dropdownMenuButton')) {
+                dropdownMenu.style.display = 'none';
+            }
+        })
     }
 })
 
@@ -123,6 +123,13 @@ async function loadExistingPalettes() {
                 }
             }
 
+        // Check accessability button
+        const contrastBtn = paletteInfo.querySelector('.contrast-btn');
+        contrastBtn.addEventListener('click', (e) => {
+            const id = e.target.getAttribute('data-id');
+            window.location.href= `../contrast.html?id=${id}`;
+        })
+
         
         // Delete button
         const deleteBtn = paletteInfo.querySelector('.delete-btn');
@@ -180,6 +187,4 @@ async function updateColor(id, index, newColor) {
     }
 }
 
-        // next steps: 
-        // add back in dropdown menu functionality
         // Add contrast checker button and load contrast page with specific palette
