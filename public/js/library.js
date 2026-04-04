@@ -110,10 +110,6 @@ async function loadExistingPalettes() {
                         color.style.backgroundColor = colorValue;
                         colorCode.textContent = colorValue;
                         if (initialColor !== colorValue) {
-                            // need to add await?
-                            console.log(palette.colors);
-                            console.log(color);
-
                             // index of color to change in 'colors' array
                             const index = i - 1;
 
@@ -149,23 +145,6 @@ async function loadExistingPalettes() {
     }
 }
 
-async function deletePalette(id) {
-    try {
-        const res = await fetch(`http://localhost:8000/api/palettes/${id}`, {
-            method: 'delete'
-        })
-
-
-        if (!res.ok) {
-            throw new Error(`Error deleting palette with id of ${id}: status: ${res.status}`)  
-        }
-
-        window.location.href= '../library.html'
-    }
-    catch (error) {
-        console.error('Error deleting palette', error.message);
-    }
-}
 
 
 async function updateColor(id, index, newColor) {
@@ -186,5 +165,24 @@ async function updateColor(id, index, newColor) {
         console.error('Error editing color:', error.message);
     }
 }
+
+async function deletePalette(id) {
+    try {
+        const res = await fetch(`http://localhost:8000/api/palettes/${id}`, {
+            method: 'delete'
+        })
+
+
+        if (!res.ok) {
+            throw new Error(`Error deleting palette with id of ${id}: status: ${res.status}`)  
+        }
+
+        window.location.href= '../library.html'
+    }
+    catch (error) {
+        console.error('Error deleting palette', error.message);
+    }
+}
+
 
         // Add contrast checker button and load contrast page with specific palette

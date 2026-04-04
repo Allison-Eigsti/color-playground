@@ -124,7 +124,7 @@ router.put('/:id/colors/:index', async (req, res, next) => {
 
     try {
         const palettes = await getAllPalettes();
-        const palette = await getPaletteById(paletteId);
+        const palette = palettes.find((palette) => palette.id === paletteId);
 
         palette.colors[index] = newColor;
 

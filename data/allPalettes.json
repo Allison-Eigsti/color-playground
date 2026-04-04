@@ -1,35 +1,24 @@
 [
   {
-    "user": "2d0cea32-520f-4358-af30-1f62149cb47c",
-    "id": 1773925466327,
-    "title": "incognito",
-    "colors": [
-      "#d2acac",
-      "#6f3434",
-      "#9a4c4c",
-      "#f59494"
-    ]
-  },
-  {
     "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
-    "id": 1775293973667,
+    "id": 1775300081508,
     "title": "Spring",
     "colors": [
-      "#b8e7ea",
-      "#9af9d9",
-      "#f0f882",
-      "#2bf78e"
+      "#f9e1f8",
+      "#98b8e1",
+      "#a9f495",
+      "#eefda5"
     ]
   },
   {
     "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
-    "id": 1775294007582,
+    "id": 1775300145641,
     "title": "Summer",
     "colors": [
-      "#dbc885",
-      "#d3770d",
-      "#da1001",
-      "#43f9f6"
+      "#fefbfb",
+      "#f28926",
+      "#ee7320",
+      "#72eedf"
     ]
   }
 ]
