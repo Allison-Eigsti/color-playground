@@ -1,8 +1,18 @@
+import { navMenuToggle } from './navToggle.js';
+
 const user = localStorage.getItem('UUID');
 const form = document.querySelector('form');
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    //Hamburger menu functionality  
+    navMenuToggle({
+        navToggle: document.querySelector('.mobile-nav-toggle'),
+        primaryNav: document.querySelector('.primary-navigation'),
+        openIcon: document.querySelector('.hamburger-icon'),
+        closeIcon: document.querySelector('.close-icon'),
+    })
+
     // Checks if browser is associated with a user
     if (user === null) {
         generateUUID();

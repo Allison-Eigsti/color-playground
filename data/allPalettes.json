@@ -11,25 +11,36 @@
     ]
   },
   {
-    "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
-    "id": 1775300145641,
-    "title": "Summer",
+    "user": "fbb08d60-4fd6-4b43-92e3-f9afb6586ce9",
+    "id": 1776083962949,
+    "title": "Paleta nueva",
     "colors": [
-      "#fefbfb",
-      "#f28926",
-      "#ee7320",
-      "#72eedf"
+      "#f4b8f2",
+      "#af25ef",
+      "#0300a8",
+      "#8bf9e3"
+    ]
+  },
+  {
+    "user": "fbb08d60-4fd6-4b43-92e3-f9afb6586ce9",
+    "id": 1776084118074,
+    "title": "Paleta nueva",
+    "colors": [
+      "#e8e3e7",
+      "#e7b5e8",
+      "#e06ee2",
+      "#dd2aea"
     ]
   },
   {
     "user": "c06cca55-21a8-4013-adfe-e39b5033efcc",
-    "id": 1775301169673,
-    "title": "Winter",
+    "id": 1776088565339,
+    "title": "New",
     "colors": [
-      "#b8f3f4",
-      "#4983c1",
-      "#0d066a",
-      "#fbe29d"
+      "#ffbdbd",
+      "#6958ee",
+      "#ffd294",
+      "#f10909"
     ]
   }
 ]
