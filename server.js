@@ -1,8 +1,9 @@
 import express from 'express';
-import palettesRouter from './routes/palettesRouter.js';
-import logger from './middleware/logger.js';
-import errorHandler from './middleware/error.js';
-import notFound from './middleware/notFound.js';
+import palettesRouter from './src/routes/palettesRouter.js';
+import logger from './src/middleware/logger.js';
+import errorHandler from './src/middleware/error.js';
+import notFound from './src/middleware/notFound.js';
+
 
 
 const app = express();
