@@ -1,9 +1,10 @@
 import express from 'express';
 import palettesRouter from './src/routes/palettesRouter.js';
+import setupRouter from './src/routes/setupRouter.js';
 import logger from './src/middleware/logger.js';
 import errorHandler from './src/middleware/error.js';
 import notFound from './src/middleware/notFound.js';
-
+import pool from './src/config/db.js';
 
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(logger);
 app.use(express.static('public'));
 
 // Routes
+app.use('/api', setupRouter);
 app.use('/api/palettes', palettesRouter);
 
 // Error Handler middlware (note to self: must come after routes)
