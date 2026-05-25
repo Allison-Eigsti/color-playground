@@ -11,4 +11,8 @@ const pool = new Pool({
     database: process.env.DB_NAME
 });
 
+pool.on('connect', () => {
+    console.log('Connection pool established with database.');
+});
+
 export default pool;

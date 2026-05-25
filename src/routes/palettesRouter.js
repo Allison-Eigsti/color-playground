@@ -2,6 +2,9 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
+import bcrypt from 'bcryptjs';
+import pool from '../config/db.js';
+
 
 const router = express.Router();
 
