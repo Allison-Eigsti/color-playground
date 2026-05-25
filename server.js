@@ -5,10 +5,12 @@ import logger from './src/middleware/logger.js';
 import errorHandler from './src/middleware/error.js';
 import notFound from './src/middleware/notFound.js';
 import pool from './src/config/db.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 // Body parser middleware
 app.use(express.json());
