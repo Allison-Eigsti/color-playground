@@ -2,7 +2,6 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import pool from '../config/db.js';
 import jwt from 'jsonwebtoken';
-import authenticateToken from '../middleware/authenticateToken.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -21,11 +20,12 @@ router.post('/register', async (req, res, next) => {
     try {
         const hash = await bcrypt.hash(password, 10);
 
-        const newUser = await pool.query(
+        const result = await pool.query(
             "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *", 
             [email, hash]);
+        const newUser = result.rows[0];
 
-        return res.status(201).json(newUser.rows[0]);
+        return res.status(201).json(newUser);
     }
     
     catch (error) {
@@ -51,10 +51,9 @@ router.post('/login', async (req, res, next) => {
         }
 
         if(await bcrypt.compare(password, user.password)) {
-            // res.status(200).json({ message: 'Login successful' });
             // Issue JWT
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '7d' });
-            res.json({ accessToken: accessToken });
+            res.status(200).json({ message: 'Login Successful', accessToken: accessToken });
         } else {
             res.status(401).json({ error: 'Invalid credentials.' });
         }

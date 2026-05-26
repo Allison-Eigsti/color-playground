@@ -4,6 +4,7 @@ import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
 import bcrypt from 'bcryptjs';
 import pool from '../config/db.js';
+import authenticateToken from '../middleware/authenticateToken.js';
 
 
 const router = express.Router();
