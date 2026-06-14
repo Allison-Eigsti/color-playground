@@ -17,6 +17,7 @@ router.post('/register', async (req, res, next) => {
         return res.status(400).json({ error: 'Email and password are required'});
     };
 
+    // Create new user: Hash password and save it along with email to user table
     try {
         const hash = await bcrypt.hash(password, 10);
 
@@ -50,6 +51,7 @@ router.post('/login', async (req, res, next) => {
             return res.status(401).json({ error: 'User not found.' })
         }
 
+        // If password entered matches user credentials, issue a user access token 
         if(await bcrypt.compare(password, user.password)) {
             // Issue JWT
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '7d' });
@@ -62,5 +64,6 @@ router.post('/login', async (req, res, next) => {
         next(error);
     }
 });
+
 
 export default router;

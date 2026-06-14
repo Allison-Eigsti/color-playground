@@ -1,54 +1,88 @@
-import express from 'express';
-import bcrypt from 'bcryptjs';
 import pool from '../config/db.js';
-import authenticateToken from '../middleware/authenticateToken.js';
-
-import { getAllUsers, getAllUserPalettes, getPalettesById, createPalette, editPalette, deletePalette } from '../controllers/paletteController.js';
 
 
-const router = express.Router();
+export const getAllUsers = async (req, res, next) => {
+    try {
+        const result = await pool.query("SELECT * FROM users");
+        const usersArray = result.rows;
 
-// GET all users
-router.get('/users', getAllUsers);
+        if (usersArray.length === 0) {
+            return res.status(404).json({ error: 'No users found.'})
+        }
 
-// GET all palettes based on user
-router.get('/', authenticateToken, getAllUserPalettes);
+        res.status(200).json(usersArray);
+    }
+    catch(error) {
+        next(error);
+    }
+}
 
-// GET a specific palettes
-router.get('/:id', authenticateToken, getPalettesById);
+// Don't need this I guess because the logged in user's data is accessible through req.user
+// export const getUserById = async (req, res, next) => {
+//     const id = req.params.id;
+    
+//     try {
+//         const result = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+//         const user = result.rows;
 
-// POST create new palette
-router.post('/', authenticateToken, createPalette);
+//         if (!user) {
+//             return res.status(404).json({ error: 'User not found.' })
+//         }
 
-// PUT update palette
-router.put('/:id/colors/:index', authenticateToken, editPalette);
-
-// DELETE delete palette
-router.delete('/:id/', authenticateToken, deletePalette);
-
-// Need routes for contrast checker? -> identify and retrieve certain palette based on id to display
-
-
-
-
-
-
-
-
-
-// // Import { palettes } from allPalettes.json
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-// const palettesFilePath = path.join(
-//     __dirname,
-//     "..",
-//     "data",
-//     "allPalettes.json"
-// );
+//         res.status(200).json(user);
+//     }
+//     catch(error) {
+//         next(error);
+//     }
+// }
 
 
-// HELPER FUNCTIONS
-// 1. Retrieve any existing palettes from json file
+export const getAllUserPalettes = async (req, res, next) => {
+    //retrieve 
+    console.log('hi user')
+}
+
+export const getPalettesById = async (req, res, next) => {
+    console.log('hi');
+}
+
+export const createPalette = async (req, res, next) => {
+    const { title, colors } = req.body;
+    console.log(req.user);
+    const userId = req.user.id;
+
+    try {
+        const result = await pool.query(
+            "INSERT INTO palettes (title, colors, user_id) VALUES ($1, $2, $3) RETURNING *", [title, JSON.stringify(colors), userId]
+        );
+        const newPalette = result.rows[0];
+        console.log(newPalette);
+
+        if (!newPalette) {
+            return res.status(400).json({ message: "Palette could not be created." })
+        }
+
+        return res.status(201).json(newPalette);
+
+    }
+    catch (error) {
+        next(error);
+    }
+}
+
+export const editPalette = async (req, res, next) => {
+    console.log('hi');
+}
+
+export const deletePalette = async (req, res, next) => {
+    console.log('hi');
+}
+
+
+
+// THIS PART WILL HOLD THE LOGIC- the functions and their connections to the database
+// // HELPER FUNCTIONS
+// // 1. Retrieve any existing palettes from json file
 // async function getAllPalettes() {
 //     const palettesData = await fs.readFile(palettesFilePath, 'utf-8');
 
@@ -90,7 +124,21 @@ router.delete('/:id/', authenticateToken, deletePalette);
 // }
 
 
-// GET specific palette
+
+
+
+// // ROUTES
+// // GET all palettes
+// router.get('/', async (req, res, next) => {
+//     try {
+//         const palettes = await getAllPalettes();
+//         res.status(200).json(palettes);
+//     } catch (error) {
+//         next(error);
+//     }
+// });
+
+// // GET specific palette
 // router.get('/:id', async (req, res, next) => {
 //     const id = parseInt(req.params.id);
 //     try {
@@ -103,7 +151,7 @@ router.delete('/:id/', authenticateToken, deletePalette);
 // })
 
 
-// POST route: create new palette
+// // POST route: create new palette
 // router.post('/', async (req, res, next) => {
 //     try {
 //         if (!req.body) {
@@ -133,7 +181,7 @@ router.delete('/:id/', authenticateToken, deletePalette);
 //     }
 // });
 
-// PUT route to edit specific palette
+// // PUT route to edit specific palette
 // router.put('/:id/colors/:index', async (req, res, next) => {
 //     const paletteId = parseInt(req.params.id);
 //     const index = parseInt(req.params.index);
@@ -155,7 +203,7 @@ router.delete('/:id/', authenticateToken, deletePalette);
 //     }
 // })
 
-// DELETE route to delete a palette
+// // DELETE route to delete a palette
 // router.delete('/:id', async (req, res, next) => {
 //     const paletteId = parseInt(req.params.id);
 
@@ -174,4 +222,3 @@ router.delete('/:id/', authenticateToken, deletePalette);
 //     }
 // })
 
-export default router;
